@@ -58,11 +58,16 @@ One of the most effective techniques to prevent the spread of infection in hospi
 
 
 Yann LeCun, Yoshua Bengio, and Geoffrey Hinton wrote about the big picture and history of deep learning. They state the key differentiation between machine and deep learning is “these layers of features are not designed by human engineers: they are learned from data using a general-purpose learning procedure” \cite{ThreeGiants}. 
+
 They also discuss the main points of supervised learning: one uses a large dataset with labels that indicate the category or value of each input data point, then the learning algorithm attempts to use a function with many many parameters to match the correct output, and the algorithm is able to change the parameters (based on what is called backpropagation using a gradient vector based on the loss function) to better fit the model and then the process is repeated until an accuracy threshold or step count has been reached. Being a better fit refers to the loss function, which measures the differences between the array of actual results and the array of the predicted results for each data point. Specific examples of loss functions are discussed later.
-The authors also go into detail about the finer points of stochastic gradient descent (SGD) and talk about how using small sets of examples is better than going one example at a time (essentially because things averaging out is better). The authors also explain the Rectified Linear Unit (ReLU) and other output functions, which introduce non-linearity in the matrix multiplications so the affine system of equations does not collapse. The Leaky ReLU has a slightly negative slope instead of any x < 0 having the value of 0.
+
+The authors also go into detail about the finer points of stochastic gradient descent (SGD) and talk about how using small sets of examples is better than going one example at a time (essentially because things averaging out is better). The authors also explain the Rectified Linear Unit (ReLU) and other output functions, which introduce non-linearity in the matrix multiplications so the affine system of equations does not collapse. The Leaky ReLU has a slightly negative slope instead of any $x < 0$ having the value of $0$.
+
 These authors also discussed CNNs, normally used for image data, and the different types of layers they use: convolutional layers, pooling layers, and fully-connected layers. Convolutional layers use patches of weights, usually much smaller than an image but also “deeper” in the 3rd dimension, which then help identify different parts of an image. CNNs have been hugely successful in the field of image recognition, which also aids in the effectiveness of self-driving cars. CNNs are now even able to caption images, showing that they really “understand” the picture and do not just see pixels of various colors.
 The author also introduced the idea of recurrent neural networks (RNNs). These are better suited for problems which “involve sequential inputs, such as speech and language.” They take in each input one at a time in order, going through the algorithm through each input while also accounting for the newer inputs, before outputting a value. These networks have trouble with storing data for a long time, so they are often combined with Long Short-Term Memory Cells (LSTMs), which is a unit that has hidden layers which allow for storing values and remembering them or clearing them based on inputs.
+
 The authors also claim that unsupervised learning will become very important, and also believe that “natural language understanding” will be a major field of impact for deep learning. However, they note that we will need completely new systems and methods to achieve “major progress in artificial intelligence” \cite{ThreeGiants}.
+
 
 The website “Neural Networks and Deep Learning,” written by Michael Nielsen, provides a excellent and quite detailed introduction to deep learning by explaining the Mixed National Instrument of Standards and Technology (MNIST) dataset and networks that have high accuracy in classifying the dataset. He mentions that perceptrons multiply their inputs by a particular weight and then a bias is added, and then that value is output (perhaps into the sigmoid or ReLU function). Technically a cost function, usually Mean Squared Error (MSE) or Cross Entropy (CE) is used to find the error between the projected outputs and the real outputs, and then the weights and biases are adjusted through backpropagation. He also goes into great detail about backpropagation and explains how putting everything into vectors and then using a graph of calculations can make the calculations simpler and make it possible to compute all of the partial derivatives in one pass. He explains some types of regularization, namely L2 (attempting to limit the total value of the weight matrix), dropout (randomly removing nodes in a network), and early stopping, all of which are designed to avoid overfitting / overtraining. He mentions that one can add more data to a training set by slightly changing his dataset (for example, adding in tilted images), which helps the training process. Nielsen also mentions the vanishing gradient problem, which is the idea that a small change in any layer can cascade throughout the rest of the layers and slow down learning. He then talks about CNNs in depth \cite{NNDL}.
 
@@ -104,7 +109,7 @@ The initial layout of the data is shown below, to the left of the data layout I 
 \begin{minipage}{\linewidth}
 	\begin{minipage}{0.49\textwidth}
 		\centering
-		\includegraphics[width=0.75\textwidth]{accuracy}
+		\includegraphics[width=0.75\textwidth]{../images/accuracy}
 	\end{minipage}
 	\hfill
 	
@@ -138,23 +143,23 @@ In clockwise order beginning with top left, these are the visualizations for the
 \begin{minipage}{\linewidth}
 	\begin{minipage}{0.49\textwidth}
 		\centering
-		\includegraphics[width=0.75\textwidth]{../original}
+		\includegraphics[width=0.75\textwidth]{../images/original}
 	\end{minipage}
 	\hfill
 	\begin{minipage}{0.49\textwidth}
 		\centering
-		\includegraphics[width=0.75\textwidth]{../complex}
+		\includegraphics[width=0.75\textwidth]{../images/complex}
 	\end{minipage}
 \end{minipage}
 \begin{minipage}{\linewidth}
 	\begin{minipage}{0.49\textwidth}
 		\centering
-		\includegraphics[width=0.75\textwidth]{../layered}
+		\includegraphics[width=0.75\textwidth]{../images/layered}
 	\end{minipage}
 	\hfill
 	\begin{minipage}{0.49\textwidth}
 		\centering
-		\includegraphics[width=0.75\textwidth]{../xyz1}
+		\includegraphics[width=0.75\textwidth]{../images/xyz1}
 	\end{minipage}
 \end{minipage}
 \\
@@ -198,7 +203,7 @@ For all the tests I ran, I recorded statistics gathered from the confusion matri
 \begin{minipage}{\linewidth}
 	\begin{minipage}{0.49\textwidth}
 		\centering
-		\includegraphics[width=0.75\textwidth]{../recall}
+		\includegraphics[width=0.75\textwidth]{../images/recall}
 	\end{minipage}
 	\hfill
 	\begin{minipage}{0.49\textwidth}
@@ -212,7 +217,7 @@ For all the tests I ran, I recorded statistics gathered from the confusion matri
 \begin{minipage}{\linewidth}
 	\begin{minipage}{0.49\textwidth}
 		\centering
-		\includegraphics[width=0.75\textwidth]{../accuracy}
+		\includegraphics[width=0.75\textwidth]{../images/accuracy}
 	\end{minipage}
 	\hfill
 	\begin{minipage}{0.49\textwidth}
@@ -226,12 +231,12 @@ For all the tests I ran, I recorded statistics gathered from the confusion matri
 \begin{minipage}{\linewidth}
 	\begin{minipage}{0.49\textwidth}
 		\centering
-		\includegraphics[width=0.75\textwidth]{../accuracy-deep}
+		\includegraphics[width=0.75\textwidth]{../images/accuracy-deep}
 	\end{minipage}
 	\hfill
 	\begin{minipage}{0.49\textwidth}
 		\centering
-		\includegraphics[width=0.75\textwidth]{../handed-original}
+		\includegraphics[width=0.75\textwidth]{../images/handed-original}
 	\end{minipage}
 \end{minipage}
 
