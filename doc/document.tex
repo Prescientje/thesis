@@ -7,13 +7,13 @@
 \begin{titlepage}
 \centering
 \title{Identifying Hand Hygiene Using Neural Networks}
-\author{James H. Edwards \\ advised by Dr. Valerie Galluzzi, Dr. Matthew Boutell, and Dr. Klaus Baer\\
+\author{James H. Edwards \\ 
+	advised by Dr. Valerie Galluzzi, Dr. Matthew Boutell, and Dr. Klaus Baer\\
 	\\
 	\\
-	A thesis submitted in partial fulfillment
-	of the requirements for the \\
+	A thesis submitted in partial fulfillment of the requirements for the \\
 	Bachelor of Science degrees in International Computer Science \\
-	 at the Rose-Hulman Institute of Technology and Hochschule Ulm.}
+	at the Rose-Hulman Institute of Technology and Hochschule Ulm.}
 	
 \end{titlepage}
 \begin{document}
@@ -32,14 +32,6 @@ This part of the thesis provides an introduction to the concepts of deep learnin
 
 \section{Hand Hygiene}
 
-
---github
-
---link to thesis pdf, poster, and final slides
-
---keep code + such on repo
-
-
 One of the most effective techniques to prevent the spread of infection in hospitals is having healthcare workers (such as doctors and nurses) follow proper hand hygiene guidelines \cite{Galluzzi}. To help achieve this task, many organizations, including the World Health Organization, have created standards and guides for how to properly perform hand hygiene. They have set out the "5 Moments of Hand Hygiene" \cite{WHO}:
 \begin{enumerate}
 	\item Before touching a patient
@@ -48,6 +40,8 @@ One of the most effective techniques to prevent the spread of infection in hospi
 	\item After touching a patient
 	\item After touching patient surroundings
 \end{enumerate}
+
+Because proper hand hygiene is so important, it is worthwhile to develop a system to ensure that healthcare workers are complying with these guidelines and following proper techniques. Therefore Dr. Galluzzi developed a system of wrist-attached sensors to measure the three axes of acceleration of a user's hands. For her Ph.D. she analyzed the data gathered from several healthcare workers during their shift, collecting data both from "hand hygiene" activities (i.e. actually washing one's hands) and "not hand hygiene" activities (e.g. unwrapping a piece of candy, tying one's shoes, or simply walking around) \cite{Galluzzi}. She then used machine learning techniques to try to identify particular hand hygiene techniques such 
 
 \section{Deep Learning}
 \begin{enumerate}
