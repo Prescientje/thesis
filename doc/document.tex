@@ -20,15 +20,20 @@
 \maketitle
 \tableofcontents
 
-
-
 \begin{abstract}
 	Both machine and deep learning are growing fields of computer science that are rapidly increasing in relevance to our society. One compelling field of application is in the healthcare industry, and specfically in hospitals. Systems can be designed to help and improve the lives of patients with particular diseases or disabilities, and systems can even be trained to diagnose complicated symptoms or to otherwise aid doctors in their duties. The experiment used in this project was originally conducted by Dr. Valerie Galluzzi, who used custom 3-D wrist accelerometer sensors in order to measure healthcare worker compliance to hand-washing guidelines. My continuation of the experiment took the data and used neural networks to generate models that can predict when a novel sample is performing hand hygiene. After trying out various neural network configurations, I attained over 84\% accuracy with over 78\% recall using a 5-layer model.
 \end{abstract}
 
 \chapter{Background}
 
-This part of the thesis provides an introduction to the concepts of deep learning and neural networks, followed by the Literature Review I conducted to gather information about other recent work in this field.
+This part of the thesis provides an introduction to the concepts of deep learning and neural networks, followed by the Literature Review I conducted to gather information about other recent work in this field. It will help the reader become familiar with the works I consulted in order to better understand my topic and explain the reasoning behind deep learning in case that is necessary for the reader.
+\\\\
+\textbf{General Questions}
+\begin{enumerate}
+	\item How much should I cite these documents? Literally every sentence?
+	\item Should I reference my work and how it relates here?
+	\item Should I have more of a summary of the articles or go more from my knowledge and just back up with citations? I feel like the Hand Hygiene and Deep Learning sections could be more from my knowledge but the parts about the camera- and sensor-based systems should be more summary-style.
+\end{enumerate}
 
 \section{Hand Hygiene}
 
@@ -45,11 +50,7 @@ Because proper hand hygiene is so important, it is worthwhile to develop a syste
 
 \section{Deep Learning}
 
-\begin{enumerate}
-	\item Simulate the brain
-	\item Convolution
-	\item Testing vs training data
-\end{enumerate}
+
 
 In the Nature article titled "Deep Learning," three pioneers of deep learning and neural networks, Yann LeCun, Yoshua Bengio, and Geoffrey Hinton write about the big picture and history of deep learning. They state that the key differentiation between machine learning and deep learning is ``these layers of features [in deep learning] are not designed by human engineers: they are learned from data using a general-purpose learning procedure'' \cite{ThreeGiants}. 
 
@@ -57,22 +58,24 @@ In general deep learning uses layers of interconnected "neurons" in order to try
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{../images/neuron_model}
-	\caption{Each component of the neural network model simulates an element of the brain. http://cs231n.github.io/convolutional-networks/}
+	\caption{Each component of the neural network model simulates an element of the brain \cite{karpathy}.}
 	\label{neural-model}
 \end{figure}
 
-Backpropagation uses the gradient of this loss function to adjust the weights. This process is repeated, usually for a certain number of steps, with the result being that the multiplications and summations hopefully emulate the actual values corresponding to the input values. In practice these models have thousands to millions of $(x_{i}, y_{i})$ pairs and usually have a few hundred nodes in each of multiple layers. ** I would like to add more about backpropagation here, possibly including info from Nielsen **
+Backpropagation uses the gradient of this loss function to adjust the weights. This process is repeated, usually for a certain number of steps, with the result being that the multiplications and summations hopefully emulate the actual values corresponding to the input values. In practice these models have thousands to millions of $(x_{i}, y_{i})$ pairs and usually have a few hundred nodes in each of multiple layers, and the data is put into vectors or matrices to simplify the code. ** I would like to add more about backpropagation here, possibly including info from Nielsen **
 
 
 ** I want to add more about SGD and get into more details **
+
 The authors also go into detail about the finer points of stochastic gradient descent (SGD) and talk about how using small sets of examples is better than going one example at a time (essentially because things averaging out is better). The authors also explain the Rectified Linear Unit (ReLU) and other output functions, which introduce non-linearity in the matrix multiplications so the affine system of equations does not collapse.
 
 ** I want to conclude my Deep Learning section by talking a bit about CNNs **
+
 These authors also discussed CNNs, normally used for image data, and the different types of layers they use: convolutional layers, pooling layers, and fully-connected layers. Convolutional layers use patches of weights, usually much smaller than an image but also “deeper” in the 3rd dimension, which then help identify different parts of an image. CNNs have been hugely successful in the field of image recognition, which also aids in the effectiveness of self-driving cars. CNNs are now even able to caption images, showing that they really “understand” the picture and do not just see pixels of various colors.
 The author also introduced the idea of recurrent neural networks (RNNs). These are better suited for problems which “involve sequential inputs, such as speech and language.” They take in each input one at a time in order, going through the algorithm through each input while also accounting for the newer inputs, before outputting a value. These networks have trouble with storing data for a long time, so they are often combined with Long Short-Term Memory Cells (LSTMs), which is a unit that has hidden layers which allow for storing values and remembering them or clearing them based on inputs.
 
 
-The website “Neural Networks and Deep Learning,” written by Michael Nielsen, provides a excellent and quite detailed introduction to deep learning by explaining the Mixed National Instrument of Standards and Technology (MNIST) dataset and networks that have high accuracy in classifying the dataset. He mentions that perceptrons multiply their inputs by a particular weight and then a bias is added, and then that value is output (perhaps into the sigmoid or ReLU function). Technically a cost function, usually Mean Squared Error (MSE) or Cross Entropy (CE) is used to find the error between the projected outputs and the real outputs, and then the weights and biases are adjusted through backpropagation. He also goes into great detail about backpropagation and explains how putting everything into vectors and then using a graph of calculations can make the calculations simpler and make it possible to compute all of the partial derivatives in one pass. He explains some types of regularization, namely L2 (attempting to limit the total value of the weight matrix), dropout (randomly removing nodes in a network), and early stopping, all of which are designed to avoid overfitting / overtraining. He mentions that one can add more data to a training set by slightly changing his dataset (for example, adding in tilted images), which helps the training process. Nielsen also mentions the vanishing gradient problem, which is the idea that a small change in any layer can cascade throughout the rest of the layers and slow down learning. He then talks about CNNs in depth \cite{NNDL}.
+The website “Neural Networks and Deep Learning,” written by Michael Nielsen, provides a excellent and quite detailed introduction to deep learning by explaining the Mixed National Instrument of Standards and Technology (MNIST) dataset and networks that have high accuracy in classifying the dataset. He mentions that perceptrons multiply their inputs by a particular weight and then a bias is added, and then that value is output (perhaps into the sigmoid or ReLU function). Technically a cost function, usually Mean Squared Error (MSE) or Cross Entropy (CE), is used to find the error between the projected outputs and the real outputs, and then the weights and biases are adjusted through backpropagation. He also goes into great detail about backpropagation and explains how putting everything into vectors and then using a graph of calculations can make the calculations simpler and make it possible to compute all of the partial derivatives in one pass. He explains some types of regularization, namely L2 (attempting to limit the total value of the weight matrix), dropout (randomly removing nodes in a network), and early stopping, all of which are designed to avoid overfitting / overtraining. He then talks about CNNs in depth \cite{NNDL}.
 
 \section{Literature Review}
 
@@ -80,19 +83,21 @@ This section gives a brief overview for each paper that I read in order to gain 
 
 \subsection{Video-Based Systems}
 
-Neverova, Wolf, Taylor, and Nebout claim that gesture identification has several challenges: “cultural and individual differences in tempos and styles of articulation, variable observation conditions, …, [and] infinitely many kinds of out-of-vocabulary motion”, among others \cite{Neverova}. Their network design, a CNN which took in intensity and depth video, along with “articulated pose information extracted from depth maps” won the 2014 ChaLearn Challenge on Multi-modal Gesture Recognition. The general system used a skeletal mapping program to try to identify the various parts of the body from a video/image based on different frame stride lengths. Their main design improvement was to use “ModDrop” to fuse or not fuse certain channels together and to choose when to fuse them in the pipeline process. 
+While my project used acceleration data, I found it helpful to look into the research utilizing video data in order to learn about another set of deep learning applications to healthcare.
 
-Starner, Weaver, and Pentland worked on a system to recognize ASL in real time. They designed two systems which used HMMs and “tracked unadorned hands” to classify signs based on a 40 word lexicon. One system was a camera on a desk looking at a signer, and the other was a camera on a hat worn by a signer (trying to identify his own signs). By using a “strong part-of-speech grammar” they achieved a test accuracy of over 87\% for the first system and over 97\% for the second. The authors did express some concern over the potential issues with increasing the possible word-count as well as the variance between different signers and mentioned that perhaps gloves or finger sensors may be needed, as well as gathering much more data overall \cite{Starner98}.
+Neverova, Wolf, Taylor, and Nebout claim that gesture identification has several challenges: “cultural and individual differences in tempos and styles of articulation, variable observation conditions, ..., [and] infinitely many kinds of out-of-vocabulary motion”, among others \cite{Neverova}. Their model, a convolutional neural network which took in intensity and depth video, along with “articulated pose information extracted from depth maps” won the 2014 ChaLearn Challenge for Multi-modal Gesture Recognition \cite{Neverova}. The general system used a skeletal mapping program to try to identify the various parts of the body from a video/image based on different frame stride lengths. Their main design improvement was to use a custom “ModDrop” process, which made the system more effective by separating or combining the different types of inputs at particular points in the pipeline \cite{Neverova}. 
+
+Starner, Weaver, and Pentland worked on a system to recognize American Sign Language in real time. They designed two systems which used Hidden Markov Models and “tracked unadorned hands” to classify signs based on a 40 word lexicon \cite{Starner98}. One system was a camera on a desk looking at a signer, and the other was a camera on a hat worn by a signer (trying to identify his own signs). By using a “strong part-of-speech grammar” they achieved a test accuracy of over 87\% for the first system and over 97\% for the second \cite{Starner98}. The authors did express some concern over the potential issues with increasing the possible word-count as well as the variance between different signers and mentioned that perhaps gloves or finger sensors may be needed, as well as gathering much more data overall \cite{Starner98}.
 
 Shin and Sung claim that gesture recognition is of vital importance for wearables. These researchers developed “dynamic hand gesture recognition techniques,” one of which used a CNN and an RNN combined taking in video data, while the other only used an RNN but used accelerometer data \cite{ShinS16}. The RNN that used accelerometer data uses LSTMs with the standard 3 gates (input, forget, output). However, trying to compress the floating points came at significant accuracy cost. With only two bits of quantization, the error rate was 32.77\%. Three bits gave an error rate of 28.69\% but 4 bits gave 11.43\%. Doing so reduced the memory requirements by over 90\%. 
 
-\subsection{Acceleration-Based Systems}
+\subsection{Sensor-Based Systems}
 
-Hammerla, Halloran, and Plötz state that the main technique in HAR “includes sliding window segmentation of time-series data captured with body-worn sensors, manually designed feature extraction procedures, and a wide variety of (supervised) classification methods” \cite{Hammerla}. Their paper covers LSTM models, a CNN, and a regular deep network applied to the HAR problem, specifically covering 3 problems: “manipulative gestures, repetitive physical activities, and a medical application … Parkinson’s disease”. Their deep network had up to five hidden layers and used either dropout or max-in norm for regularization with mini-batches of size 64. This network achieved just over 90\% accuracy on the RPA dataset but got almost 60\% on the other two datasets. The other networks did much better over the entire problem set.
+Bulling, Blank, and Schiele set out to make a comprehensive overview of the HAR problem with “body-worn inertial sensors” \cite{Bulling}. They first mention several fields that would benefit from activity recognition: the industrial, sports, entertainment, and healthcare sectors \cite{Bulling}. They noted several applications and devices such as the Wii and Kinects as well as the Nike+ shoes which help track activity. They mentioned several key challenges that the field of HAR has: no clear definition of specific activities, the various possible composition of sensors, and the specific evaluation metrics for each application. Other challenges include intraclass variability, interclass similarity, the Null class problem, the diversity of physical activities, class imbalance, the annotation of ground truth, data collection and experiment design, variability in sensors, and system design. I can certainly understand how these issues can cause major problems in identification. For my data I am not exactly sure how much effect intraclass variability has in my classification system, however people certainly wash their hands in different ways, perhaps by doing motions in different orders. Being left- or right-handed also could play a role. Of huge importance to me is dealing with class imbalance, because my dataset is over 95\% “not-hand-hygiene” samples. The authors also propose a system model called the Activity Recognition Chain which has the following steps: data acquisition, signal preprocessing, segmentation, feature extraction and selection, training, and classification. 
 
-Bulling, Blank, and Schiele set out to make a comprehensive overview of the HAR problem with “body-worn inertial sensors”. They first mention several fields that would benefit from activity recognition: the industrial, sports, entertainment, and healthcare sectors \cite{Bulling}. They noted several applications and devices such as the Wii and Kinects as well as the Nike+ shoes which help track activity. They mentioned several key challenges that the field of HAR has: no clear definition of specific activities, the various possible composition of sensors, and the specific evaluation metrics for each application. Other challenges include intraclass variability, interclass similarity, the Null class problem, the diversity of physical activities, class imbalance, the annotation of ground truth, data collection and experiment design, variability in sensors, and system design. I can certainly understand how these issues can cause major problems in identification. For my data I am not exactly sure how much effect intraclass variability has in my classification system, however people certainly wash their hands in different ways, perhaps by doing motions in different orders. Being left- or right-handed also could play a role. Of huge importance to me is dealing with class imbalance, because my dataset is over 95\% “not-hand-hygiene” samples. The authors also propose a system model called the Activity Recognition Chain which has the following steps: data acquisition, signal preprocessing, segmentation, feature extraction and selection, training, and classification.
+Hammerla, Halloran, and Plötz provide another overview of how deep learning techniques are applied to the area of Human Activity Recognition (HAR). They state that the main technique of HAR ``includes sliding window segmentation of time-series data captured with body-worn sensors, manually designed feature extraction procedures, and a wide variety of (supervised) classification methods'' \cite{Hammerla}. Their paper applies various types of neural networks to covering 3 problems: ``manipulative gestures, repetitive physical activities, and a medical application ... in Parkinson’s disease'' \cite{Hammerla}. One of the networks had five hidden layers and used either dropout or max-in norm for regularization with mini-batches of size 64. This network achieved just over 90\% accuracy on the repetitive gesture dataset but got almost 60\% on the other two datasets; the other networks did better on average over the three problems \cite{Hammerla}.
 
-Lester, Choudhury, and Borriello designed a “personal activity recognition system” to be used by anyone. They used a single sensor that could be put in different locations on the body but then had multiple types of sensors. Twelve subjects performed 8 activities over a few days “carrying a collection of sensors worn in three different locations on the body.” The researchers wanted to find out if the location of the sensor mattered, how much values changed between users, and how many sensors are actually required to “recognize a significant set of basic activities?” \cite{Lester2006}.
+Lester, Choudhury, and Borriello designed a ``personal activity recognition system'' to be used by anyone \cite{Lester2006}. They used a single sensor that could be put in different locations on the body but then had multiple types of sensors. Twelve subjects performed 8 activities over a few days ``carrying a collection of sensors worn in three different locations on the body.” The researchers wanted to find out if the location of the sensor mattered, how much values changed between users, and how many sensors are actually required to “recognize a significant set of basic activities?'' \cite{Lester2006}.
 Using HMMs they got between 80\% and 90\% accuracy for each sensor location, as well as all sensors combined. They found that the location of the sensor did not really matter, the system worked well on a new subject, and only 3 types of sensors were needed to do the job well: audio, barometric pressure, and accelerometer.
 
 
@@ -102,33 +107,79 @@ Now that the reader has an introduction to the neural networks and a view on the
 
 \section{Initial Steps}
 
-My project is a continuation of the work of Dr. Valerie Galluzzi, who did her dissertation on using machine learning techniques to identify if various healthcare workers were being compliant with the guidelines of the World Health Organization. She and her team** worked to develop custom wrist-wearable acceleration sensors, which sent data to a separate device. The data could be offloaded for investigation. I was given most of the data she used, which consisted of X total samples from Y healthcare workers in Z hospital in A year. These acceleration values were taken at 100 Hz, and measured the X, Y, and Z values for each hand for varying lengths of time (the data for each hand was recorded on separate devices but the values were stored together). 
+My project is a continuation of the work of Dr. Valerie Galluzzi, who did her dissertation on using machine learning techniques to identify if various healthcare workers were being compliant with the guidelines of the World Health Organization. She and her team worked to develop custom wrist-wearable acceleration sensors, which sent data to a separate device. The data could be offloaded for investigation. I was given most of the data she used, which consisted of X total samples from Y healthcare workers in Z hospital in A year. These acceleration values were taken at 100 Hz, and measured the X, Y, and Z values for each hand for varying lengths of time (the data for each hand was recorded on separate devices but the values were stored together). 
 
-\begin{quote}
-Put in the data columns for the IPython notebook CSV part
-\end{quote}
+\begin{figure}
+	\centering
+	\begin{tabular}{| l | l |}
+		\hline
+		Participant: & Random ID \\ 
+		\hline
+		Handedness: & h \\ 
+		\hline
+		Job: & o \\ 
+		\hline
+		Rate: & 100 \\ 
+		\hline
+		Samples: & \begin{tabular}{l | l}
+			Left: & \begin{tabular}{l | l}
+				0: & \begin{tabular}{l | c}
+					Sample & \textless String of "X,Y,Z" values \textgreater\\
+					\hline
+					Class & ``HH'' or ``NHH''\\
+					\hline
+				\end{tabular}\\ \hline
+				1: & \begin{tabular}{l | l}
+					Sample & \textless String of "X,Y,Z" values \textgreater\\
+					\hline
+					Class & ``HH'' or ``NHH''\\
+					\hline
+				\end{tabular}\\ \hline
+				\vdots & \vdots\\
+			\end{tabular}\\
+			\hline
+			Right: & \begin{tabular}{l | l}
+				0: & \begin{tabular}{l | c}
+					Sample & \textless String of "X,Y,Z" values \textgreater\\
+					\hline
+					Class & ``HH'' or ``NHH''\\
+					\hline
+				\end{tabular}\\ \hline
+				1: & \begin{tabular}{l | l}
+					Sample & \textless String of "X,Y,Z" values \textgreater\\
+					\hline
+					Class & ``HH'' or ``NHH''\\
+					\hline
+				\end{tabular}\\ \hline
+				\vdots & \vdots\\
+			\end{tabular}\\
+		\end{tabular}
+	\end{tabular}
+	\caption{A Visual Explanation of the Original JSON Data}
+	\label{jsonformat}
+\end{figure}
 
-I initially worked on reorganizing the data. It had been given to me in a JSON file, whereas it is much easier to work with CSV files that can be imported in Pandas, a Python module that can be combined with TensorFlow (Google's Deep Learning API). Once I had a Python script which converted the data to CSVs, I then made a second Python script to load the data from the CSV files and put the various acceleration data points into separate X, Y, and Z matrices. These matrices served as the inputs to the Tensorflow models.
 
-The initial layout of the data is shown below, to the left of the data layout I used for the majority of the project:\\
-\begin{minipage}{\linewidth}
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		\includegraphics[width=0.75\textwidth]{../images/accuracy}
-	\end{minipage}
-	\hfill
-	
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		Sample image.
-	\end{minipage}
-\end{minipage}
+I initially worked on reorganizing the data. It had been given to me in a JSON file shown in Figure~\ref{jsonformat}, whereas it is much easier to work with CSV files that can be imported in Pandas, a Python module that can be combined with TensorFlow (Google's Deep Learning API). Once I had a Python script which converted the data to CSVs, I then made a second Python script to load the data from the CSV files and put the various acceleration data points into separate X, Y, and Z matrices. These matrices served as the inputs to the Tensorflow models.
+\begin{figure}
+	\centering
+	\begin{tabular}{| c | c | c |}
+		\hline
+		X & Y & Z\\
+		\hline
+		$x_{0}, x_{1}, ... x_{N-1}$ & $y_{0}, y_{1}, ... y_{N-1}$ & $z_{0}, z_{1}, ... z_{N-1}$ \\
+		\hline
+		$x_{N}, x_{N+1}, ... x_{2N-1}$ & $y_{N}, y_{N+1}, ... y_{2N-1}$ & $z_{N+1}, z_{N+2}, ... z_{2N-1}$ \\
+		\vdots & \vdots & \vdots \\
+	\end{tabular}
+	\caption{A Visual Explanation of the Data Processed into Matrices with Width N}
+	\label{matrixformat}
+\end{figure}
+The layout of the preprocessed data I used for the majority of the project is shown in Figure~\ref{matrixformat}:\\
 
-DATA SLICING DISCUSSION\\
-Because of the way the data was collected, I did not actually have a continuous stream of data; that is, each sample did not exactly or directly take place immediately before or after another sample. Therefore I had to work with the individual slices provided to me, rather than a "constant" stream of values I could divide up any way I wished.
+Because of the way the data was collected, I did not actually have a continuous stream of data; that is, each sample did not exactly or directly take place immediately before or after another sample. Therefore I had to work with the individual slices provided to me, rather than a "constant" stream of values I could divide up any way I wished. This split of the data meant that I unfortunately could not truly look at slicing an entire session's data into different samples but did also allow for simple labelling of the samples as either Hand Hygiene or Not Hand Hygiene.
 
-DATA IMBALANCE DISCUSSION\\
-One important aspect of the data to be discussed is that over 95\% of the total length of all data samples were from Non-Hand-Hygiene samples. This imbalance led to various discussions about how it should be resolved, as my initial tests simply ignored the HH samples around 96\% accuracy. 
+One important aspect of the data to be discussed is that over 95\% of the total length of all data samples were from Non-Hand-Hygiene samples. This imbalance led to various discussions about how it should be resolved, as my initial tests simply ignored the HH samples around 96\% accuracy. To combat this problem, I consulted with Dr. Galluzzi and decided to ``supersample'' the HH samples. Therefore I would take, for example, an HH sample with 2000 acceleration values and, for a sample length of 25, take $x_{0} ... x_{24}$ as one sample and then take $x_{8} ... x_{32}$ as a second sample, continuing on so that there were now many more HH samples. The exact supersampling coefficient depended on the sample length, but was between 1 and 30 for all sample lengths.
 
 FINAL PIPELINE SUMMARY ??
 
@@ -171,9 +222,9 @@ In clockwise order beginning with top left, these are the visualizations for the
 
 I then added a Convolutional Model, and I also added more layers to the Complex model and the Layered model in an attempt to improve accuracy.
 
-The convolutional model ...
+The convolutional model was an attempt to think of the X,Y,Z acceleration data as something akin to an RGB picture. I used 3 channels (for the X, Y, and Z data) as well as dropout for regularization. Nevertheless, this model had the worst performance overall, with the accuracy of the both-hands model coming in at under 50\%. Perhaps thinking about the data in this way just did not work within the framework of a convolution neural network.
 
-The XYZ model ...
+On the other hand, the XYZ model had too much success. It usually reached over 99.5\% accuracy, which told me that something was off. 
 
 
 $$
