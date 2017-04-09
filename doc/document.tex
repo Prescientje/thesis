@@ -105,7 +105,7 @@ Now that the reader has an introduction to the neural networks and a view on the
 
 \section{Initial Steps}
 
-My project is a continuation of the work of Dr. Valerie Galluzzi, who did her dissertation on using machine learning techniques to identify if various healthcare workers were being compliant with the guidelines of the World Health Organization. She and her team worked to develop custom wrist-wearable acceleration sensors, which sent data to a separate device. The data could be offloaded for investigation. I was given most of the data she used, which consisted of X total samples from Y healthcare workers in Z hospital in A year. These acceleration values were taken at 100 Hz, and measured the X, Y, and Z values for each hand for varying lengths of time (the data for each hand was recorded on separate devices but the values were stored together). 
+My project is a continuation of the work of Dr. Valerie Galluzzi, who did her dissertation on using machine learning techniques to identify if various healthcare workers were being compliant with the guidelines of the World Health Organization. She and her team worked to develop custom wrist-wearable acceleration sensors, which sent data to a separate device. The data could be offloaded for investigation. I was given most of the data she used, which consisted of many samples from 116 healthcare workers in a hospital \cite{Galluzzi}. These acceleration values were taken at 100 Hz, and measured the X, Y, and Z values for each hand for varying lengths of time (the data for each hand was recorded on separate devices but the values were stored together). 
 
 \begin{figure}
 	\centering
@@ -125,13 +125,13 @@ My project is a continuation of the work of Dr. Valerie Galluzzi, who did her di
 					Sample & \textless String of "X,Y,Z" values \textgreater\\
 					\hline
 					Class & ``HH'' or ``NHH''\\
-					\hline
+					%\hline
 				\end{tabular}\\ \hline
 				1: & \begin{tabular}{l | l}
 					Sample & \textless String of "X,Y,Z" values \textgreater\\
 					\hline
 					Class & ``HH'' or ``NHH''\\
-					\hline
+					%\hline
 				\end{tabular}\\ \hline
 				\vdots & \vdots\\
 			\end{tabular}\\
@@ -141,13 +141,13 @@ My project is a continuation of the work of Dr. Valerie Galluzzi, who did her di
 					Sample & \textless String of "X,Y,Z" values \textgreater\\
 					\hline
 					Class & ``HH'' or ``NHH''\\
-					\hline
+					%\hline
 				\end{tabular}\\ \hline
 				1: & \begin{tabular}{l | l}
 					Sample & \textless String of "X,Y,Z" values \textgreater\\
 					\hline
 					Class & ``HH'' or ``NHH''\\
-					\hline
+					%\hline
 				\end{tabular}\\ \hline
 				\vdots & \vdots\\
 			\end{tabular}\\
@@ -161,60 +161,84 @@ My project is a continuation of the work of Dr. Valerie Galluzzi, who did her di
 I initially worked on reorganizing the data. It had been given to me in a JSON file shown in Figure~\ref{jsonformat}, whereas it is much easier to work with CSV files that can be imported in Pandas, a Python module that can be combined with TensorFlow (Google's Deep Learning API). Once I had a Python script which converted the data to CSVs, I then made a second Python script to load the data from the CSV files and put the various acceleration data points into separate X, Y, and Z matrices. These matrices served as the inputs to the Tensorflow models.
 \begin{figure}
 	\centering
-	\begin{tabular}{| c | c | c |}
-		\hline
-		X & Y & Z\\
-		\hline
-		$x_{0}, x_{1}, ... x_{N-1}$ & $y_{0}, y_{1}, ... y_{N-1}$ & $z_{0}, z_{1}, ... z_{N-1}$ \\
-		\hline
-		$x_{N}, x_{N+1}, ... x_{2N-1}$ & $y_{N}, y_{N+1}, ... y_{2N-1}$ & $z_{N+1}, z_{N+2}, ... z_{2N-1}$ \\
-		\vdots & \vdots & \vdots \\
-	\end{tabular}
+	\begin{tabular}{ ccc }
+		%\hline
+		$X$ & $Y$ & $Z$\\
+		%\hline
+		$$ 
+		\left[ \begin{array}{cccc}
+		x_{1} & x_{2} & ... & x_{n} \\
+		x_{n+1} & x_{n+2} & ... & x_{2*n} \\
+		\vdots & & \ddots & \\
+		\end{array} \right] 
+		$$
+		&
+		$$ 
+		\left[ \begin{array}{cccc}
+		y_{1} & y_{2} & ... & y_{n} \\
+		y_{n+1} & y_{n+2} & ... & y_{2*n} \\
+		\vdots & & \ddots & \\
+		\end{array} \right] 
+		$$
+		&
+		$$ 
+		\left[ \begin{array}{cccc}
+		z_{1} & z_{2} & ... & z_{n} \\
+		z_{n+1} & z_{n+2} & ... & z_{2*n} \\
+		\vdots & & \ddots & \\
+		\end{array} \right] 
+		$$\\
+%		$x_{0}, x_{1}, ... x_{N-1}$ & $y_{0}, y_{1}, ... y_{N-1}$ & $z_{0}, z_{1}, ... z_{N-1}$ \\
+%		\hline
+%		$x_{N}, x_{N+1}, ... x_{2N-1}$ & $y_{N}, y_{N+1}, ... y_{2N-1}$ & $z_{N+1}, z_{N+2}, ... z_{2N-1}$ \\
+%		\vdots & \vdots & \vdots \\
+		%\hline
+	\end{tabular} 
 	\caption{A Visual Explanation of the Data Processed into Matrices with Width N}
 	\label{matrixformat}
 \end{figure}
-The layout of the preprocessed data I used for the majority of the project is shown in Figure~\ref{matrixformat}:\\
+The layout of the preprocessed data I used for the majority of the project is shown in Figure~\ref{matrixformat}. I split each dimension into its own matrix. I used each of $n= \lbrace5,25,50,75,100,125,150,175,200,225,250\rbrace $ during testing of the models, in order to see how using different window lengths affected the outcome.\\
 
 Because of the way the data was collected, I did not actually have a continuous stream of data; that is, each sample did not exactly or directly take place immediately before or after another sample. Therefore I had to work with the individual slices provided to me, rather than a "constant" stream of values I could divide up any way I wished. This split of the data meant that I unfortunately could not truly look at slicing an entire session's data into different samples but did also allow for simple labelling of the samples as either Hand Hygiene or Not Hand Hygiene.
 
 One important aspect of the data to be discussed is that over 95\% of the total length of all data samples were from Non-Hand-Hygiene samples. This imbalance led to various discussions about how it should be resolved, as my initial tests simply ignored the HH samples around 96\% accuracy. To combat this problem, I consulted with Dr. Galluzzi and decided to ``supersample'' the HH samples. Therefore I would take, for example, an HH sample with 2000 acceleration values and, for a sample length of 25, take $x_{0} ... x_{24}$ as one sample and then take $x_{8} ... x_{32}$ as a second sample, continuing on so that there were now many more HH samples. The exact supersampling coefficient depended on the sample length, but was between 1 and 30 for all sample lengths.
 
+
+
 \section{Models}
 
-I began with 4 models, here listed with the names I gave them:
+I began with 4 models, listed here with the names I gave them:
 \begin{enumerate}
-	\item Original Model: A simple model with no hidden layer, which took in the $X,Y,Z$ values.
-	\item Complex Model: A model with no hidden layer but used the $X,Y,Z,X^{2},X^{2},X^{2},X*Y,Y*Z,Z*X$ values as inputs.
-	\item Layered Model: A model with 1 hidden layer but only the $X,Y,Z$ values as inputs.
-	\item XYZ Model: A model with a hidden layer but the data was arranged with the concept of the \textit{previous, now,} and \textit{next} instances.\\
+	\item Original Model: A simple model with no hidden layer, which took in the $X,Y,Z$ values, shown in Figure~\ref{original-model}.
+	\item Complex Model: A model with no hidden layer but used the $X,Y,Z,X^{2},X^{2},X^{2},X*Y,Y*Z,Z*X$ values as inputs, shown in Figure~\ref{complex-model}.
+	\item Layered Model: A model with 1 hidden layer but only the $X,Y,Z$ values as inputs, shown in Figure~\ref{layered-model}.
+	\item XYZ Model: A model with a hidden layer but the data was arranged with the concept of the \textit{previous, now,} and \textit{next} instances, shown in Figure~\ref{xyz-model}.
 \end{enumerate}
 
-Following a standard convention for neural network models, I will illustrate the models below.
-In clockwise order beginning with top left, these are the visualizations for the Original model, the Complex model, the XYZ model, and finally the Layered model.
-
-\begin{minipage}{\linewidth}
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		\includegraphics[width=0.75\textwidth]{../images/original}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		\includegraphics[width=0.75\textwidth]{../images/complex}
-	\end{minipage}
-\end{minipage}
-\begin{minipage}{\linewidth}
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		\includegraphics[width=0.75\textwidth]{../images/layered}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		\includegraphics[width=0.75\textwidth]{../images/xyz1}
-	\end{minipage}
-\end{minipage}
-\\
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{../images/original}
+	\caption{The Original Model}
+	\label{original-model}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{../images/complex}
+		\caption{The Complex Model}
+	\label{complex-model}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{../images/layered}
+	\caption{The Layered Model}
+	\label{layered-model}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{../images/xyz1}
+	\caption{The XYZ Model}
+	\label{xyz-model}
+\end{figure}
 
 I then added a Convolutional Model, and I also added more layers to the Complex model and the Layered model in an attempt to improve accuracy.
 
@@ -223,15 +247,15 @@ The convolutional model was an attempt to think of the X,Y,Z acceleration data a
 On the other hand, the XYZ model had too much success. It usually reached over 99.5\% accuracy, which told me that something was off. 
 
 
-$$
-\left[
-\begin{array}{cccccccccccccc}
-x_{1} & y_{1} & z_{1} & x_{2} & ... & x_{n+1} & y_{n+1} & z_{n+1} & x_{n+2} & ... & x_{2*n+1} & y_{2*n+1} & ... & z_{3*n} \\
-x_{n+1} & y_{n+1} & z_{n+1} & x_{n+2} & ... & x_{2*n+1} & y_{2*n+1} & z_{2*n+1} & x_{2*n+2} & ... & x_{3*n+1} & y_{3*n+1} & ... & z_{4*n} \\
-\vdots & & (previous) & & \vdots & & (now) & &  & \vdots & & (next) & \ddots\\
-\end{array}
-\right]
-$$
+%$
+%\left[
+%\begin{array}{cccccccccccccc}
+%_{1} & y_{1} & z_{1} & x_{2} & ... & x_{n+1} & y_{n+1} & z_{n+1} & x_{n+2} & ... & x_{2*n+1} & y_{2*n+1} & ... & %z_{3*n} \\
+%x_{n+1} & y_{n+1} & z_{n+1} & x_{n+2} & ... & x_{2*n+1} & y_{2*n+1} & z_{2*n+1} & x_{2*n+2} & ... & x_{3*n+1} & %y_{3*n+1} & ... & z_{4*n} \\
+%\vdots & & (previous) & & \vdots & & (now) & &  & \vdots & & (next) & \ddots\\
+%\end{array}
+%\right]
+%$$
 
 As mentioned before, I also simply added four hidden layers to the Layered Model and the Complex Model. I will not show the illustration here, but these hidden layers consisted of 512 nodes. 
 
@@ -251,46 +275,31 @@ This part covers the results of the experiments I ran, described in the previous
 
 For all the tests I ran, I recorded statistics gathered from the confusion matrix. One of the main values one can gather from a confusion matrix is recall, which is $\frac{truepositives}{truepositives + falsenegatives} $ \cite{ThreeGiants}.
 
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{../images/recall}
+	\caption{Recall Results}
+	\label{recall}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{../images/accuracy}
+	\caption{Accuracy Results}
+	\label{accuracy}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{../images/accuracy-deep}
+	\caption{Deep Model Accuracy}
+	\label{acuracy-deep}
+\end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{../images/handed-original}
+	\caption{Accuracy By Hand}
+	\label{handedness-original}
+\end{figure}
 
-\begin{minipage}{\linewidth}
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		\includegraphics[width=0.75\textwidth]{../images/recall}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		Sample image.
-	\end{minipage}
-\end{minipage}
-
-\section{Accuracy}
-
-\begin{minipage}{\linewidth}
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		\includegraphics[width=0.75\textwidth]{../images/accuracy}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		Sample image.
-	\end{minipage}
-\end{minipage}
-
-\section{Other Views}
-
-\begin{minipage}{\linewidth}
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		\includegraphics[width=0.75\textwidth]{../images/accuracy-deep}
-	\end{minipage}
-	\hfill
-	\begin{minipage}{0.49\textwidth}
-		\centering
-		\includegraphics[width=0.75\textwidth]{../images/handed-original}
-	\end{minipage}
-\end{minipage}
 
 \chapter{Discussion}
 
@@ -315,15 +324,15 @@ Something else to look into would identifying proper hand hygiene technique, com
 
 
 
-$$
-\left[
-\begin{array}{cccc}
-x_{1} & x_{2} & ... & x_{n} \\
-x_{n+1} & x_{n+2} & ... & x_{2*n} \\
- \vdots & & \ddots & \\
-\end{array}
-\right]
-$$
+%$$
+%\left[
+%\begin{array}{cccc}
+%x_{1} & x_{2} & ... & x_{n} \\
+%x_{n+1} & x_{n+2} & ... & x_{2*n} \\
+% \vdots & & \ddots & \\
+%\end{array}
+%\right]
+%$$
 
 
 
