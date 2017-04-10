@@ -205,7 +205,7 @@ One important aspect of the data to be discussed is that over 95\% of the total 
 
 
 
-\section{Models}
+\section{Models}\label{models}
 
 I began with 4 models, listed here with the names I gave them:
 \begin{enumerate}
@@ -242,38 +242,42 @@ I began with 4 models, listed here with the names I gave them:
 
 I then added a Convolutional Model, and I also added more layers to the Complex model and the Layered model in an attempt to improve accuracy.
 
-The convolutional model was an attempt to think of the X,Y,Z acceleration data as something akin to an RGB picture. I used 3 channels (for the X, Y, and Z data) as well as dropout for regularization. Nevertheless, this model had the worst performance overall, with the accuracy of the both-hands model coming in at under 50\%. Perhaps thinking about the data in this way just did not work within the framework of a convolution neural network.
+The convolutional model was an attempt to think of the X,Y,Z acceleration data as something akin to an RGB picture. I used 3 channels (for the X, Y, and Z data) as well as dropout for regularization. Nevertheless, this model had the worst performance overall, with the accuracy of the both-hands model coming in at under 50\%, shown later in Figure~\ref{acuracy-deep}. Perhaps thinking about the data in this way just did not work within the framework of a convolution neural network.
 
-On the other hand, the XYZ model had too much success. It usually reached over 99.5\% accuracy, which told me that something was off. 
+On the other hand, the XYZ model had too much success. It usually reached over 99.5\% accuracy, which told me that something was off. To me, this accuracy was just too high, so I checked and double-checked for any mistakes but did not find any. The layout of the data, shown in Figure~\ref{xyz-data}, combined with the super-sampling I did to increase the percentage of HH samples, worked out to make any given hand-hygiene sample have many repeated values. I have assumed that this repetition led to easy identification of the hand-hygiene samples for the system, causing the almost impossibly high accuracy. Indeed, when I reduced the supersampling value in testing, results were markedly lower.
+
+\begin{figure}
+	\centering
+	$$
+	\left[
+	\begin{array}{cccccccccccccc}
+	x_{1} & y_{1} & z_{1} & x_{2} & ... & x_{n+1} & y_{n+1} & z_{n+1} & x_{n+2} & ... & x_{2*n+1} & y_{2*n+1} & ... & z_{3*n} \\
+	x_{n+1} & y_{n+1} & z_{n+1} & x_{n+2} & ... & x_{2*n+1} & y_{2*n+1} & z_{2*n+1} & x_{2*n+2} & ... & x_{3*n+1} & y_{3*n+1} & ... & z_{4*n} \\
+	\vdots & & (previous) & & \vdots & & (now) & &  & \vdots & & (next) & \ddots\\
+	\end{array}
+	\right]
+	$$
+	\caption{The XYZ Data Layout}
+	\label{xyz-data}
+\end{figure}
 
 
-%$
-%\left[
-%\begin{array}{cccccccccccccc}
-%_{1} & y_{1} & z_{1} & x_{2} & ... & x_{n+1} & y_{n+1} & z_{n+1} & x_{n+2} & ... & x_{2*n+1} & y_{2*n+1} & ... & %z_{3*n} \\
-%x_{n+1} & y_{n+1} & z_{n+1} & x_{n+2} & ... & x_{2*n+1} & y_{2*n+1} & z_{2*n+1} & x_{2*n+2} & ... & x_{3*n+1} & %y_{3*n+1} & ... & z_{4*n} \\
-%\vdots & & (previous) & & \vdots & & (now) & &  & \vdots & & (next) & \ddots\\
-%\end{array}
-%\right]
-%$$
-
-As mentioned before, I also simply added four hidden layers to the Layered Model and the Complex Model. I will not show the illustration here, but these hidden layers consisted of 512 nodes. 
+As mentioned before, I also simply added four hidden layers to the Layered Model and the Complex Model. I will not show the illustration here, but these hidden layers consisted of 512 nodes. These models did show an increase in recall and accuracy that I will explain further in the Results chapter.
 
 \section{Other Techniques}
 
 With the models which had multiple layers, I also implemented L2 regularization. This technique attempts to prevent overfitting by reducing the total value of the weight matrices. Thus the model cannot become overtrained on the training data and score lower on the testing data.
 
-Convolutional Model Attempt
-
-XYZ Model Attempt
+**I will also talk about batch normalization here**
 
 \chapter{Results}
 
 This part covers the results of the experiments I ran, described in the previous part of this thesis.
+** I need to update the plots with the 5 layered model data, and possibly take out the XYZ values as well. **
 
 \section{Recall}
 
-For all the tests I ran, I recorded statistics gathered from the confusion matrix. One of the main values one can gather from a confusion matrix is recall, which is $\frac{truepositives}{truepositives + falsenegatives} $ \cite{ThreeGiants}.
+For all the tests I ran, I recorded statistics gathered from the confusion matrix. One of the main values one can gather from a confusion matrix is recall, which is $\frac{truepositives}{truepositives + falsenegatives}$. These values are all the averages from the models which took in the data of both the left and right hands as inputs. These values are from the testing portions of 10-fold cross-validated data. As shown in Figure~\ref{recall}, beyond the results of the XYZ model, the Layered model performed the best, maxing out at 71.10\% with a sample length of 100 (= 1 second). The maximum value of the Complex model was 75.07\% at the sample length of 75. 
 
 \begin{figure}
 	\centering
@@ -281,6 +285,13 @@ For all the tests I ran, I recorded statistics gathered from the confusion matri
 	\caption{Recall Results}
 	\label{recall}
 \end{figure}
+
+\section{Accuracy}
+
+The accuracy results simple look at the percentage of total samples classified accurately. Overall these results were higher than the recall results, which is understandable since the accuracy values include the NHH samples. Again, the Layered model achieved the highest results, shown in Figure~\ref{accuracy}. The maximum value on the Layered model was an accuracy of 84.27\% with sample length 50. Not surprisingly the Complex model outperformed the Original model as well; the best Complex model result was 81.60\%.
+
+In Figure~\ref{acuracy-deep}, the less-than-stellar results for the Convolutional Model can be seen. As explained in Section~\ref{models}, setting up the data as a ``3-channel'' matrix did not perform well. One factor for these results could be the sample length dimensions required to make the various convolutional layers work out. 
+
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{../images/accuracy}
@@ -293,10 +304,17 @@ For all the tests I ran, I recorded statistics gathered from the confusion matri
 	\caption{Deep Model Accuracy}
 	\label{acuracy-deep}
 \end{figure}
+
+\section{Other Notes}
+
+The reader may have noticed the dips in the charts for the sample lengths of 150 and 225. I found this drop very fascinating and I can only hypothesize that these sample lengths just did not ``line up'' well with the periodic motion of hand washing, which led to the poor results for these values. It is also interesting that the sample lengths immediately before and after these values rebounded and had results comparable to the other, shorter sample lengths.
+
+One interesting view is to look at the results by handedness, shown in Figure~\ref{handedness-original} for the Original Model. In general the model that only used the left hand's data performed worse than those using only the right hand or both hands' data. It would certainly make sense that using both hands would be better than only one hand, but it is also a bit surprising that looking at only the right hand was so much better than the left hand, and was virtually on par with using both hands. I can certainly see that the right hand being the dominant hand for most people may help out the system to recognize activities in some way.
+
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{../images/handed-original}
-	\caption{Accuracy By Hand}
+	\caption{Accuracy By Hand for the Original Model}
 	\label{handedness-original}
 \end{figure}
 
