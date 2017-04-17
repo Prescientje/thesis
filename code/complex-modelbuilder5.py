@@ -49,7 +49,7 @@ if sample_len < 51:
     batchsize = 8000
 if sample_len < 24:
     batchsize = 80000
-epochs = 15
+epochs = 10
 superfactor = int(superfactor)
 print_write("complex-modelbuilder5 TEST")
 print_write("This does not save any model files.")

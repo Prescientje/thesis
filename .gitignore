@@ -24,3 +24,6 @@
 
 *.pptx
 
+*.csv
+
+__pycache__
