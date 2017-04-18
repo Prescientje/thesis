@@ -73,11 +73,12 @@ rightsamples = 0
 # We know deltat = 0.01 because the data is at 100Hz
 # I have to assume no initial velocity and the initial position is at the origin
 # But I make make the initial values be the previous values in the matrices-- I believe that is correct but I want to plot what happens
-for j in range(1):
-    figure(1, figsize=(6,6))
+for j in range(5):
+    #figure(1, figsize=(6,6))
     for t in range(0,sample_len):
         xleftvel[j][t] = 0 + xleft[j][t]*0.01
         xleftpos[j][t] = 0 + xleftvel[j][t]*0.01 + 0.5*xleft[j][t]*0.01*0.01
 
     plt.plot(xleftpos[j])
     plt.savefig("test-%02d.png" % j)
+    print("saved fig %02d" % j)
