@@ -21,8 +21,8 @@ def print_confusion_vals(con):
     print_write("Specificity = %0.6f" % get_specificity(con))
     print_write("Miss Rate   = %0.6f" % get_missrate(con))
     print_write("Fallout     = %0.6f" % get_fallout(con))
-    print_write("Recall      = %0.6f" % get_recall(con))
     print_write("Precision   = %0.6f" % get_precision(con))
+    print_write("Recall      = %0.6f" % get_recall(con))
     print_write("Accuracy    = %0.6f" % get_accuracy(con))
 
 script, sample_len, superfactor, test_num, loud = argv
@@ -42,7 +42,7 @@ logfile = open(file_s, 'w')
 sample_len = int(sample_len)
 learn_rate = 0.001
 stddeviation = 0.02
-ALPHA = 0.005
+ALPHA = 0.001
 loud = int(loud)
 batchsize = 1000
 if sample_len < 51:
