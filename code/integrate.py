@@ -55,8 +55,6 @@ xrightvel = rightsamples[::3,:].T
 yrightvel = rightsamples[1::3,:].T
 zrightvel = rightsamples[2::3,:].T
 
-leftsamples  = 0
-rightsamples = 0
 
 # We know deltat = 0.01 because the data is at 100Hz
 # I have to assume no initial velocity and the initial position is at the origin
@@ -72,9 +70,13 @@ for j in range(0,50,10):
         zleftpos[j][t] = 0 + zleftvel[j][t]*0.01 + 0.5*zleft[j][t]*0.01*0.01
 
     fig = plt.figure()
+    hh = "hh"
+    if outleft[j][1] > 0:
+        hh = "nhh"
+    fig.suptitle("plot-%03d-%02dl %s" % (sample_len,j,hh))
     ax = fig.gca(projection='3d')
     ax.plot(xleftpos[j],yleftpos[j],zleftpos[j])
-    plt.savefig("pic-integrate-left-%s-%02d.png" % (sample_len,j))
+    plt.savefig("plot-%03d-%02dl.png" % (sample_len,j))
     
 for j in range(0,50,10):
     #figure(1, figsize=(6,6))
@@ -87,6 +89,10 @@ for j in range(0,50,10):
         zrightpos[j][t] = 0 + zrightvel[j][t]*0.01 + 0.5*zright[j][t]*0.01*0.01
 
     fig = plt.figure()
+    hh = "hh"
+    if outleft[j][1] > 0:
+        hh = "nhh"
+    fig.suptitle("plot-%03d-%02dl %s" % (sample_len,j,hh))
     ax = fig.gca(projection='3d')
     ax.plot(xleftpos[j],yleftpos[j],zleftpos[j])
-    plt.savefig("pic-integrate-left-%s-%02d.png" % (sample_len,j))
+    plt.savefig("plot-%03d-%02dr.png" % (sample_len,j))
