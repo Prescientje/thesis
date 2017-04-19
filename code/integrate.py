@@ -61,13 +61,22 @@ zrightvel = rightsamples[2::3,:].T
 # But I make make the initial values be the previous values in the matrices
 #   --I believe that is correct but I want to plot what happens
 for j in range(0,50,10):
-    for t in range(0,sample_len):
-        xleftvel[j][t] = 0 + xleft[j][t]*0.01
-        xleftpos[j][t] = 0 + xleftvel[j][t]*0.01 + 0.5*xleft[j][t]*0.01*0.01
-        yleftvel[j][t] = 0 + yleft[j][t]*0.01
-        yleftpos[j][t] = 0 + yleftvel[j][t]*0.01 + 0.5*yleft[j][t]*0.01*0.01
-        zleftvel[j][t] = 0 + zleft[j][t]*0.01
-        zleftpos[j][t] = 0 + zleftvel[j][t]*0.01 + 0.5*zleft[j][t]*0.01*0.01
+    xleftvel[j][0] = 0
+    xleftpos[j][0] = 0
+    yleftvel[j][0] = 0
+    yleftpos[j][0] = 0
+    zleftvel[j][0] = 0
+    zleftpos[j][0] = 0
+    for t in range(1,sample_len):
+        # vel_t = vel_t-1 + dt*acc_t
+        xleftvel[j][t] = xleftvel[j][t-1] + xleft[j][t]*0.01
+        xleftpos[j][t] = xleftpos[j][t-1] + xleftvel[j][t]*0.01 
+        yleftvel[j][t] = yleftvel[j][t-1] + yleft[j][t]*0.01
+        yleftpos[j][t] = yleftpos[j][t-1] + yleftvel[j][t]*0.01 
+        zleftvel[j][t] = zleftvel[j][t-1] + zleft[j][t]*0.01
+        zleftpos[j][t] = zleftpos[j][t-1] + zleftvel[j][t]*0.01 
+        #yleftvel[j][t] = 0 + yleft[j][t]*0.01
+        #yleftpos[j][t] = 0 + yleftvel[j][t]*0.01 + 0.5*yleft[j][t]*0.01*0.01
 
     fig = plt.figure()
     hh = "hh"
@@ -79,20 +88,25 @@ for j in range(0,50,10):
     plt.savefig("plot-%03d-%02dl.png" % (sample_len,j))
     
 for j in range(0,50,10):
-    #figure(1, figsize=(6,6))
-    for t in range(0,sample_len):
-        xrightvel[j][t] = 0 + xright[j][t]*0.01
-        xrightpos[j][t] = 0 + xrightvel[j][t]*0.01 + 0.5*xright[j][t]*0.01*0.01
-        yrightvel[j][t] = 0 + yright[j][t]*0.01
-        yrightpos[j][t] = 0 + yrightvel[j][t]*0.01 + 0.5*yright[j][t]*0.01*0.01
-        zrightvel[j][t] = 0 + zright[j][t]*0.01
-        zrightpos[j][t] = 0 + zrightvel[j][t]*0.01 + 0.5*zright[j][t]*0.01*0.01
+    xrightvel[j][0] = 0
+    xrightpos[j][0] = 0
+    yrightvel[j][0] = 0
+    yrightpos[j][0] = 0
+    zrightvel[j][0] = 0
+    zrightpos[j][0] = 0
+    for t in range(1,sample_len):
+        xrightvel[j][t] = xrightvel[j][t-1] + xright[j][t]*0.01
+        xrightpos[j][t] = xrightpos[j][t-1] + xrightvel[j][t]*0.01 
+        yrightvel[j][t] = yrightvel[j][t-1] + yright[j][t]*0.01
+        yrightpos[j][t] = yrightpos[j][t-1] + yrightvel[j][t]*0.01 
+        zrightvel[j][t] = zrightvel[j][t-1] + zright[j][t]*0.01
+        zrightpos[j][t] = zrightpos[j][t-1] + zrightvel[j][t]*0.01 
 
     fig = plt.figure()
     hh = "hh"
     if outleft[j][1] > 0:
         hh = "nhh"
-    fig.suptitle("plot-%03d-%02dl %s" % (sample_len,j,hh))
+    fig.suptitle("plot-%03d-%02dr %s" % (sample_len,j,hh))
     ax = fig.gca(projection='3d')
-    ax.plot(xleftpos[j],yleftpos[j],zleftpos[j])
+    ax.plot(xrightpos[j],yrightpos[j],zrightpos[j])
     plt.savefig("plot-%03d-%02dr.png" % (sample_len,j))

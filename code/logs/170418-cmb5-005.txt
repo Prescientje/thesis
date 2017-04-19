@@ -1,0 +1,376 @@
+complex-modelbuilder5 TEST
+This does not save any model files.
+Sample length = 5
+Learning rate = 0.001000
+Stddev = 0.020000
+Alpha = 0.001000
+Superfactor = 1
+Epochs = 10
+Batch size = 80000
+lmodelname = savedModels-complex/5-left/5-left
+ 
+starting tensorflow section
+ 
+ 
+Trial 1 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.798772
+ltest  accuracy score = 0.777328
+ltrain confusion matrix =
+[[ 414442  234626]
+ [ 127534 1023144]]
+ltest  confusion matrix =
+[[ 39466  26644]
+ [ 17884 115977]]
+rtrain accuracy score = 0.725900
+rtest  accuracy score = 0.716679
+rtrain confusion matrix =
+[[ 236763  412305]
+ [  81006 1069672]]
+rtest  confusion matrix =
+[[ 17592  48518]
+ [  8138 125723]]
+btrain accuracy score = 0.866130
+btest  accuracy score = 0.823949
+btrain confusion matrix =
+[[ 475676  173392]
+ [  67540 1083138]]
+btest  confusion matrix =
+[[ 45615  20495]
+ [ 14710 119151]]
+ 
+lsaver saved 1
+rsaver saved 1
+bsaver saved 1
+ 
+ 
+Trial 2 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.789391
+ltest  accuracy score = 0.858345
+ltrain confusion matrix =
+[[421727 248047]
+ [130996 998975]]
+ltest  confusion matrix =
+[[ 29650  15754]
+ [ 12573 141995]]
+rtrain accuracy score = 0.718326
+rtest  accuracy score = 0.799517
+rtrain confusion matrix =
+[[ 245586  424188]
+ [  82754 1047217]]
+rtest  confusion matrix =
+[[ 12655  32749]
+ [  7342 147226]]
+btrain accuracy score = 0.860020
+btest  accuracy score = 0.890095
+btrain confusion matrix =
+[[ 511904  157870]
+ [  94058 1035913]]
+btest  confusion matrix =
+[[ 32671  12733]
+ [  9245 145323]]
+ 
+lsaver saved 2
+rsaver saved 2
+bsaver saved 2
+ 
+ 
+Trial 3 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.799987
+ltest  accuracy score = 0.777949
+ltrain confusion matrix =
+[[ 392387  236800]
+ [ 123173 1047385]]
+ltest  confusion matrix =
+[[ 49618  36373]
+ [  8031 105950]]
+rtrain accuracy score = 0.727500
+rtest  accuracy score = 0.683066
+rtrain confusion matrix =
+[[ 219778  409409]
+ [  81022 1089536]]
+rtest  confusion matrix =
+[[ 29957  56034]
+ [  7344 106637]]
+btrain accuracy score = 0.867467
+btest  accuracy score = 0.815604
+btrain confusion matrix =
+[[ 464202  164985]
+ [  73541 1097017]]
+btest  confusion matrix =
+[[ 55189  30802]
+ [  6072 107909]]
+ 
+ 
+ 
+Trial 4 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.797738
+ltest  accuracy score = 0.786514
+ltrain confusion matrix =
+[[ 383898  243429]
+ [ 120591 1051828]]
+ltest  confusion matrix =
+[[ 56538  31313]
+ [ 11378 100742]]
+rtrain accuracy score = 0.727240
+rtest  accuracy score = 0.674678
+rtrain confusion matrix =
+[[ 215415  411912]
+ [  78987 1093432]]
+rtest  confusion matrix =
+[[ 29813  58038]
+ [  7017 105103]]
+btrain accuracy score = 0.862513
+btest  accuracy score = 0.865105
+btrain confusion matrix =
+[[ 484392  142935]
+ [ 104507 1067912]]
+btest  confusion matrix =
+[[ 68480  19371]
+ [  7604 104516]]
+ 
+ 
+ 
+Trial 5 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.809468
+ltest  accuracy score = 0.679140
+ltrain confusion matrix =
+[[ 417393  236315]
+ [ 106594 1039443]]
+ltest  confusion matrix =
+[[42425 19045]
+ [45118 93384]]
+rtrain accuracy score = 0.719515
+rtest  accuracy score = 0.761607
+rtrain confusion matrix =
+[[ 230551  423157]
+ [  81645 1064392]]
+rtest  confusion matrix =
+[[ 22163  39307]
+ [  8365 130137]]
+btrain accuracy score = 0.869720
+btest  accuracy score = 0.755836
+btrain confusion matrix =
+[[ 504863  148845]
+ [  85626 1060411]]
+btest  confusion matrix =
+[[ 49980  11490]
+ [ 37336 101166]]
+ 
+ 
+ 
+Trial 6 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.792666
+ltest  accuracy score = 0.823125
+ltrain confusion matrix =
+[[ 419927  240979]
+ [ 132170 1006669]]
+ltest  confusion matrix =
+[[ 32147  22125]
+ [ 13245 132455]]
+rtrain accuracy score = 0.717061
+rtest  accuracy score = 0.807933
+rtrain confusion matrix =
+[[ 230001  430905]
+ [  78313 1060526]]
+rtest  confusion matrix =
+[[ 23496  30776]
+ [  7632 138068]]
+btrain accuracy score = 0.859149
+btest  accuracy score = 0.890360
+btrain confusion matrix =
+[[ 512256  148650]
+ [ 104845 1033994]]
+btest  confusion matrix =
+[[ 42379  11893]
+ [ 10032 135668]]
+ 
+rsaver saved 6
+bsaver saved 6
+ 
+ 
+Trial 7 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.799881
+ltest  accuracy score = 0.764891
+ltrain confusion matrix =
+[[ 397375  233737]
+ [ 126427 1042207]]
+ltest  confusion matrix =
+[[ 48920  35146]
+ [ 11869 104036]]
+rtrain accuracy score = 0.725465
+rtest  accuracy score = 0.695736
+rtrain confusion matrix =
+[[ 213529  417583]
+ [  76511 1092123]]
+rtest  confusion matrix =
+[[ 29041  55025]
+ [  5819 110086]]
+btrain accuracy score = 0.862484
+btest  accuracy score = 0.821534
+btrain confusion matrix =
+[[ 454582  176530]
+ [  70964 1097670]]
+btest  confusion matrix =
+[[ 53262  30804]
+ [  4884 111021]]
+ 
+ 
+ 
+Trial 8 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.797619
+ltest  accuracy score = 0.808608
+ltrain confusion matrix =
+[[ 387104  239254]
+ [ 124980 1048407]]
+ltest  confusion matrix =
+[[ 56671  32149]
+ [  6124 105028]]
+rtrain accuracy score = 0.743376
+rtest  accuracy score = 0.564554
+rtrain confusion matrix =
+[[ 229080  397278]
+ [  64580 1108807]]
+rtest  confusion matrix =
+[[28577 60243]
+ [26834 84318]]
+btrain accuracy score = 0.862667
+btest  accuracy score = 0.850459
+btrain confusion matrix =
+[[ 459873  166485]
+ [  80679 1092708]]
+btest  confusion matrix =
+[[ 65194  23626]
+ [  6278 104874]]
+ 
+ 
+ 
+Trial 9 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.793252
+ltest  accuracy score = 0.837297
+ltrain confusion matrix =
+[[ 393212  246274]
+ [ 125820 1034439]]
+ltest  confusion matrix =
+[[ 49771  25921]
+ [  6615 117665]]
+rtrain accuracy score = 0.720568
+rtest  accuracy score = 0.723566
+rtrain confusion matrix =
+[[ 216982  422504]
+ [  80402 1079857]]
+rtest  confusion matrix =
+[[ 26594  49098]
+ [  6181 118099]]
+btrain accuracy score = 0.861924
+btest  accuracy score = 0.870107
+btrain confusion matrix =
+[[ 471282  168204]
+ [  80298 1079961]]
+btest  confusion matrix =
+[[ 53872  21820]
+ [  4155 120125]]
+ 
+ 
+ 
+Trial 10 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.793996
+ltest  accuracy score = 0.828506
+ltrain confusion matrix =
+[[ 412833  236843]
+ [ 133911 1016158]]
+ltest  confusion matrix =
+[[ 42075  23427]
+ [ 10867 123603]]
+rtrain accuracy score = 0.708188
+rtest  accuracy score = 0.770168
+rtrain confusion matrix =
+[[ 222189  427487]
+ [  97700 1052369]]
+rtest  confusion matrix =
+[[ 28527  36975]
+ [  8985 125485]]
+btrain accuracy score = 0.857983
+btest  accuracy score = 0.895995
+btrain confusion matrix =
+[[ 478885  170791]
+ [  84803 1065266]]
+btest  confusion matrix =
+[[ 53337  12165]
+ [  8633 125837]]
+ 
+bsaver saved 10
+ 
+Left Train Confusion Vals
+Specificity = 0.891687
+Miss Rate   = 0.372293
+Fallout     = 0.108313
+Precision   = 0.763402
+Recall      = 0.627707
+Accuracy    = 0.797277
+Left Test Confusion Vals
+Specificity = 0.888128
+Miss Rate   = 0.374588
+Fallout     = 0.111872
+Precision   = 0.756840
+Recall      = 0.625412
+Accuracy    = 0.794170
+Right Train Confusion Vals
+Specificity = 0.930548
+Miss Rate   = 0.648903
+Fallout     = 0.069452
+Precision   = 0.737847
+Recall      = 0.351097
+Accuracy    = 0.723314
+Right Test Confusion Vals
+Specificity = 0.927089
+Miss Rate   = 0.652653
+Fallout     = 0.072911
+Precision   = 0.726207
+Recall      = 0.347347
+Accuracy    = 0.719750
+Both Train Confusion Vals
+Specificity = 0.926748
+Miss Rate   = 0.251482
+Fallout     = 0.073252
+Precision   = 0.850504
+Recall      = 0.748518
+Accuracy    = 0.863006
+Both Test Confusion Vals
+Specificity = 0.915184
+Miss Rate   = 0.272938
+Fallout     = 0.084816
+Precision   = 0.826770
+Recall      = 0.727062
+Accuracy    = 0.847904
+Both Test Confusion Matrix
+[[  519979.   195199.]
+ [  108949.  1175590.]]
+ 
+average train score   = 
+[ 0.79727687  0.72331374  0.86300573]
+average test score    = 
+[ 0.79417035  0.71975031  0.84790446]
+best test score       = 
+[ 0.85834517  0.80793311  0.89599544]
+worst test score      = 
+[ 0.67914008  0.56455404  0.75583582]

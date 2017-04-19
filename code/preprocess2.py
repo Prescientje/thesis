@@ -35,6 +35,8 @@ def get_superfactor(sample_len):
         return 60
     if sample_len == 900:
         return 60
+    if sample_len == 1000:
+        return 150
     if sample_len == 2000:
         return 240
     if sample_len == 3600:
