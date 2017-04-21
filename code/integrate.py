@@ -55,12 +55,27 @@ xrightvel = rightsamples[::3,:].T
 yrightvel = rightsamples[1::3,:].T
 zrightvel = rightsamples[2::3,:].T
 
+xs = np.random.permutation(xleft.shape[0])
+hhc  = 0
+nhhc = 0
+randrange = []
+for x in range(100):
+    hhval  = outleft[xs[x]][0]
+    nhhval = outleft[xs[x]][1]
+    if hhval > 0 and hhc < 5:
+        randrange.append(xs[x])
+        hhc += 1
+    if nhhval > 0 and nhhc < 5:
+        randrange.append(xs[x])
+        nhhc += 1
+
+print(randrange)
 
 # We know deltat = 0.01 because the data is at 100Hz
 # I have to assume no initial velocity and the initial position is at the origin
 # But I make make the initial values be the previous values in the matrices
 #   --I believe that is correct but I want to plot what happens
-for j in range(0,50,10):
+for j in randrange:
     xleftvel[j][0] = 0
     xleftpos[j][0] = 0
     yleftvel[j][0] = 0
@@ -69,13 +84,14 @@ for j in range(0,50,10):
     zleftpos[j][0] = 0
     for t in range(1,sample_len):
         # vel_t = vel_t-1 + dt*acc_t
+        # pos_t = pos_t-1 + dt*vel_t + 0.5*dt*dt*acc_t
         xleftvel[j][t] = xleftvel[j][t-1] + xleft[j][t]*0.01
         xleftpos[j][t] = xleftpos[j][t-1] + xleftvel[j][t]*0.01 + xleft[j][t]*0.01*0.01*0.5
-        print("acc = %02.4f" % xleft[j][t])
-        print("vel = %02.4f" % xleftvel[j][t])
-        print("pos = %02.4f" % xleftpos[j][t])
-        print()
-        print()
+        #print("acc = %02.4f" % xleft[j][t])
+        #print("vel = %02.4f" % xleftvel[j][t])
+        #print("pos = %02.4f" % xleftpos[j][t])
+        #print()
+        #print()
         yleftvel[j][t] = yleftvel[j][t-1] + yleft[j][t]*0.01
         yleftpos[j][t] = yleftpos[j][t-1] + yleftvel[j][t]*0.01 + yleft[j][t]*0.01*0.01*0.5
         zleftvel[j][t] = zleftvel[j][t-1] + zleft[j][t]*0.01
@@ -91,8 +107,10 @@ for j in range(0,50,10):
     ax = fig.gca(projection='3d')
     ax.plot(xleftpos[j],yleftpos[j],zleftpos[j])
     plt.savefig("./plots/plot-%03d-%02dl.png" % (sample_len,j))
-''' 
-for j in range(0,50,10):
+
+
+
+for j in randrange:
     xrightvel[j][0] = 0
     xrightpos[j][0] = 0
     yrightvel[j][0] = 0
@@ -115,4 +133,6 @@ for j in range(0,50,10):
     ax = fig.gca(projection='3d')
     ax.plot(xrightpos[j],yrightpos[j],zrightpos[j])
     plt.savefig("plot-%03d-%02dr.png" % (sample_len,j))
-''' 
+
+
+
