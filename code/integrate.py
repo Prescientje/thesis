@@ -71,6 +71,11 @@ for j in range(0,50,10):
         # vel_t = vel_t-1 + dt*acc_t
         xleftvel[j][t] = xleftvel[j][t-1] + xleft[j][t]*0.01
         xleftpos[j][t] = xleftpos[j][t-1] + xleftvel[j][t]*0.01 + xleft[j][t]*0.01*0.01*0.5
+        print("acc = %02.4f" % xleft[j][t])
+        print("vel = %02.4f" % xleftvel[j][t])
+        print("pos = %02.4f" % xleftpos[j][t])
+        print()
+        print()
         yleftvel[j][t] = yleftvel[j][t-1] + yleft[j][t]*0.01
         yleftpos[j][t] = yleftpos[j][t-1] + yleftvel[j][t]*0.01 + yleft[j][t]*0.01*0.01*0.5
         zleftvel[j][t] = zleftvel[j][t-1] + zleft[j][t]*0.01
@@ -85,8 +90,8 @@ for j in range(0,50,10):
     fig.suptitle("plot-%03d-%02dl %s" % (sample_len,j,hh))
     ax = fig.gca(projection='3d')
     ax.plot(xleftpos[j],yleftpos[j],zleftpos[j])
-    plt.savefig("plot-%03d-%02dl.png" % (sample_len,j))
-    
+    plt.savefig("./plots/plot-%03d-%02dl.png" % (sample_len,j))
+''' 
 for j in range(0,50,10):
     xrightvel[j][0] = 0
     xrightpos[j][0] = 0
@@ -110,3 +115,4 @@ for j in range(0,50,10):
     ax = fig.gca(projection='3d')
     ax.plot(xrightpos[j],yrightpos[j],zrightpos[j])
     plt.savefig("plot-%03d-%02dr.png" % (sample_len,j))
+''' 
