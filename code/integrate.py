@@ -132,7 +132,7 @@ for j in randrange:
     fig.suptitle("plot-%03d-%02dr %s" % (sample_len,j,hh))
     ax = fig.gca(projection='3d')
     ax.plot(xrightpos[j],yrightpos[j],zrightpos[j])
-    plt.savefig("plot-%03d-%02dr.png" % (sample_len,j))
+    plt.savefig("./plots/plot-%03d-%02dr.png" % (sample_len,j))
 
 
 
