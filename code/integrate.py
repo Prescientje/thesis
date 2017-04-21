@@ -70,11 +70,11 @@ for j in range(0,50,10):
     for t in range(1,sample_len):
         # vel_t = vel_t-1 + dt*acc_t
         xleftvel[j][t] = xleftvel[j][t-1] + xleft[j][t]*0.01
-        xleftpos[j][t] = xleftpos[j][t-1] + xleftvel[j][t]*0.01 
+        xleftpos[j][t] = xleftpos[j][t-1] + xleftvel[j][t]*0.01 + xleft[j][t]*0.01*0.01*0.5
         yleftvel[j][t] = yleftvel[j][t-1] + yleft[j][t]*0.01
-        yleftpos[j][t] = yleftpos[j][t-1] + yleftvel[j][t]*0.01 
+        yleftpos[j][t] = yleftpos[j][t-1] + yleftvel[j][t]*0.01 + yleft[j][t]*0.01*0.01*0.5
         zleftvel[j][t] = zleftvel[j][t-1] + zleft[j][t]*0.01
-        zleftpos[j][t] = zleftpos[j][t-1] + zleftvel[j][t]*0.01 
+        zleftpos[j][t] = zleftpos[j][t-1] + zleftvel[j][t]*0.01 + zleft[j][t]*0.01*0.01*0.5
         #yleftvel[j][t] = 0 + yleft[j][t]*0.01
         #yleftpos[j][t] = 0 + yleftvel[j][t]*0.01 + 0.5*yleft[j][t]*0.01*0.01
 
@@ -96,11 +96,11 @@ for j in range(0,50,10):
     zrightpos[j][0] = 0
     for t in range(1,sample_len):
         xrightvel[j][t] = xrightvel[j][t-1] + xright[j][t]*0.01
-        xrightpos[j][t] = xrightpos[j][t-1] + xrightvel[j][t]*0.01 
+        xrightpos[j][t] = xrightpos[j][t-1] + xrightvel[j][t]*0.01 + xright[j][t]*0.01*0.01*0.5
         yrightvel[j][t] = yrightvel[j][t-1] + yright[j][t]*0.01
-        yrightpos[j][t] = yrightpos[j][t-1] + yrightvel[j][t]*0.01 
+        yrightpos[j][t] = yrightpos[j][t-1] + yrightvel[j][t]*0.01 + yright[j][t]*0.01*0.01*0.5
         zrightvel[j][t] = zrightvel[j][t-1] + zright[j][t]*0.01
-        zrightpos[j][t] = zrightpos[j][t-1] + zrightvel[j][t]*0.01 
+        zrightpos[j][t] = zrightpos[j][t-1] + zrightvel[j][t]*0.01 + zright[j][t]*0.01*0.01*0.5
 
     fig = plt.figure()
     hh = "hh"
