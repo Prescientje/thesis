@@ -18,16 +18,16 @@ def print_write(s):
     logfile.write("\n")
 
 def print_confusion_vals(con):
+    print_write("Specificity = %0.6f" % get_specificity(con))
     print_write("Miss Rate   = %0.6f" % get_missrate(con))
     print_write("Fallout     = %0.6f" % get_fallout(con))
     print_write("Precision   = %0.6f" % get_precision(con))
     print_write("Recall      = %0.6f" % get_recall(con))
     print_write("Accuracy    = %0.6f" % get_accuracy(con))
-    print_write("Specificity = %0.6f" % get_specificity(con))
 
 script, sample_len, superfactor, test_num, loud = argv
 today = date.today()
-file_s = "logs/" + today.strftime("%y%m%d") + "-cmb5-%s.txt" % test_num
+file_s = "logs/" + today.strftime("%y%m%d") + "-es-cmb5-%s.txt" % test_num
 left_save = sample_len + "-left/" + sample_len + "-left"
 right_save = sample_len + "-right/" + sample_len + "-right"
 both_save = sample_len + "-both/" + sample_len + "-both"
@@ -51,7 +51,7 @@ if sample_len < 24:
     batchsize = 80000
 epochs = 20
 superfactor = int(superfactor)
-print_write("complex-modelbuilder5 TEST")
+print_write("complex-modelbuilder5 early-stop TEST")
 print_write("This does not save any model files.")
 print_write("Sample length = %d" % (sample_len))
 print_write("Learning rate = %.6f" % (learn_rate))
@@ -458,7 +458,9 @@ for k in range(10):
         print_write("Trial %d %s" % ((k+1), lmodelname))
         print_write(" ")
 
-    for e in range(epochs):
+    e = 0
+    
+    while e < epochs:
         #print("epoch %d of %d complex %d" % (e+1,epochs,sample_len))
         #print_write("train len = %d" % len(train_lxi))
         ix = 0
@@ -515,8 +517,17 @@ for k in range(10):
             sess.run(optimizer_left, feed_dict=lbatch_feed)
             sess.run(optimizer_right,feed_dict=rbatch_feed)
             sess.run(optimizer_both, feed_dict=bbatch_feed)
-        if (e+1) % (epochs/5) == 0:
-            print(e,"complex")
+
+        #new material
+        bout_vals = sess.run(prediction_both, feed_dict=train_bdata_feeder)
+        epoch_acc = accuracy_score(train_bdata_feeder[lout_place].argmax(axis=1),
+                                     bout_vals.argmax(axis=1))
+        print(e, epoch_acc)
+        e += 1
+
+
+        #if (e+1) % (epochs/5) == 0:
+            #print(e,"complex")
     loutputs_pred = sess.run(prediction_left,   feed_dict=train_ldata_feeder)
     loutputs_test = sess.run(prediction_left,   feed_dict= test_ldata_feeder)
     routputs_pred = sess.run(prediction_right,  feed_dict=train_rdata_feeder)
@@ -557,14 +568,14 @@ for k in range(10):
 
     if loud > 0:
         print_write(" ")
-        print_write("ltrain accuracy score = %f" % (ls))
-        print_write("ltest  accuracy score = %f" % (lst))
-        print_write("ltrain confusion matrix =\n%s" % (str(lc)))
-        print_write("ltest  confusion matrix =\n%s" % (str(lct)))
-        print_write("rtrain accuracy score = %f" % (rs))
-        print_write("rtest  accuracy score = %f" % (rst))
-        print_write("rtrain confusion matrix =\n%s" % (str(rc)))
-        print_write("rtest  confusion matrix =\n%s" % (str(rct)))
+        #print_write("ltrain accuracy score = %f" % (ls))
+        #print_write("ltest  accuracy score = %f" % (lst))
+        #print_write("ltrain confusion matrix =\n%s" % (str(lc)))
+        #print_write("ltest  confusion matrix =\n%s" % (str(lct)))
+        #print_write("rtrain accuracy score = %f" % (rs))
+        #print_write("rtest  accuracy score = %f" % (rst))
+        #print_write("rtrain confusion matrix =\n%s" % (str(rc)))
+        #print_write("rtest  confusion matrix =\n%s" % (str(rct)))
         print_write("btrain accuracy score = %f" % (bs))
         print_write("btest  accuracy score = %f" % (bst))
         print_write("btrain confusion matrix =\n%s" % (str(bc)))
@@ -587,19 +598,19 @@ for k in range(10):
     if lst > maxscoret[0]:
         maxscoret[0] = lst
         #lsaver.save(sess=sess,save_path=lmodelname)
-        print_write("lsaver saved %d" % (k+1))
+        #print_write("lsaver saved %d" % (k+1))
     if lst < minscoret[0]:
         minscoret[0] = lst
     if rst > maxscoret[1]:
         maxscoret[1] = rst
         #rsaver.save(sess=sess,save_path=rmodelname)
-        print_write("rsaver saved %d" % (k+1))
+        #print_write("rsaver saved %d" % (k+1))
     if rst < minscoret[1]:
         minscoret[1] = rst
     if bst > maxscoret[2]:
         maxscoret[2] = bst
         #bsaver.save(sess=sess,save_path=bmodelname)
-        print_write("bsaver saved %d" % (k+1))
+        #print_write("bsaver saved %d" % (k+1))
     if bst < minscoret[2]:
         minscoret[2] = bst
         
