@@ -49,7 +49,7 @@ if sample_len < 51:
     batchsize = 8000
 if sample_len < 24:
     batchsize = 80000
-epochs = 100
+epochs = 200
 superfactor = int(superfactor)
 print_write("complex-modelbuilder5 early-stop TEST")
 print_write("This does not save any model files.")
@@ -359,7 +359,7 @@ for i in range(3):
 maxscoret = np.zeros(3)
 
 
-for k in range(1): 
+for k in range(5): 
     sess = tf.Session()
     sess.run(init)
 
