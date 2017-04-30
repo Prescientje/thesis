@@ -5,7 +5,7 @@
 
 
 python cmb5-earlystop.py 200 25 200 1
-#python cmb5-earlystop.py 100 13 100 1
+python cmb5-earlystop.py 100 13 100 1
 
 #python cmb5-earlystop.py 125 16 125 1
 #python cmb5-earlystop.py 150 18 150 1

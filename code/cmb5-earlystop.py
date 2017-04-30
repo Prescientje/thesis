@@ -42,7 +42,7 @@ logfile = open(file_s, 'w')
 sample_len = int(sample_len)
 learn_rate = 0.001
 stddeviation = 0.02
-ALPHA = 0.002
+ALPHA = 0.005
 loud = int(loud)
 batchsize = 8000
 if sample_len < 51:
@@ -359,7 +359,7 @@ for i in range(3):
 maxscoret = np.zeros(3)
 
 
-for k in range(5): 
+for k in range(10): 
     sess = tf.Session()
     sess.run(init)
 
