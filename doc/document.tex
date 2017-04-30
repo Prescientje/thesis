@@ -21,7 +21,7 @@
 \tableofcontents
 
 \begin{abstract}
-	Both machine and deep learning are growing fields of computer science that are rapidly increasing in relevance to our society. One compelling field of application is in the healthcare industry, and specfically in hospitals. Systems can be designed to help and improve the lives of patients with particular diseases or disabilities, and systems can even be trained to diagnose complicated symptoms or to otherwise aid doctors in their duties. The experiment used in this project was originally conducted by Dr. Valerie Galluzzi, who used custom 3-D wrist accelerometer sensors in order to measure healthcare worker compliance to hand-washing guidelines. My continuation of the experiment took the data and used neural networks to generate models that can predict when a novel sample is performing hand hygiene. After trying out various neural network configurations, I attained over 84\% accuracy with over 78\% recall using a 5-layer model.
+	Both machine and deep learning are growing fields of computer science that are rapidly increasing in relevance to our society. One compelling field of application is in the healthcare industry, and specfically in hospitals. Systems can be designed to help and improve the lives of patients with particular diseases or disabilities, and systems can even be trained to diagnose complicated symptoms or to otherwise aid doctors in their duties. The experiment used in this project was originally conducted by Dr. Valerie Galluzzi, who used custom 3-D wrist accelerometer sensors in order to measure healthcare worker compliance to hand-washing guidelines. The contribution of this work was to take the data and used neural networks to generate models that can predict when a novel sample is performing hand hygiene. After trying out various neural network configurations, the best model attained over 84\% accuracy with over 78\% recall.
 \end{abstract}
 
 \chapter{Background}
@@ -106,7 +106,7 @@ Shin and Sung claim that gesture recognition is of vital importance for wearable
 
 \subsection{Sensor-Based Systems}
 
-Bulling, Blank, and Schiele set out to make a comprehensive overview of the Human Activity Recognition (HAR) problem with ``body-worn inertial sensors'' \cite{Bulling}. They first mention several fields that would benefit from activity recognition: the industrial, sports, entertainment, and healthcare sectors \cite{Bulling}. They noted several applications and devices such as the Wii and Kinects as well as the Nike+ shoes which help track activity. They mentioned several key challenges that the field of HAR has: no clear definition of specific activities, the various possible composition of sensors, and the specific evaluation metrics for each application. Other challenges include intraclass variability, interclass similarity, the Null class problem, the diversity of physical activities, class imbalance, the annotation of ground truth, data collection and experiment design, variability in sensors, and system design. I can certainly understand how these issues can cause major problems in identification. For my data I am not exactly sure how much effect intraclass variability has in my classification system, however people certainly wash their hands in different ways, perhaps by doing motions in different orders. Being left- or right-handed also could play a role. Of huge importance to my work is dealing with class imbalance, because my dataset is over 95\% NHH samples. The authors also propose a system model called the Activity Recognition Chain which has the following steps: data acquisition, signal preprocessing, segmentation, feature extraction and selection, training, and classification \cite{Bulling}. 
+Bulling, Blank, and Schiele set out to make a comprehensive overview of the Human Activity Recognition (HAR) problem with ``body-worn inertial sensors'' \cite{Bulling}. They first mention several fields that would benefit from activity recognition: the industrial, sports, entertainment, and healthcare sectors \cite{Bulling}. They noted several applications and devices such as the Wii and Kinects as well as the Nike+ shoes which help track activity. They mentioned several key challenges that the field of HAR has: no clear definition of specific activities, the various possible composition of sensors, and the specific evaluation metrics for each application. Other challenges include intraclass variability, interclass similarity, the Null class problem, the diversity of physical activities, class imbalance, the annotation of ground truth, data collection and experiment design, variability in sensors, and system design. I can certainly understand how these issues can cause major problems in identification. For my data I am not exactly sure how much effect intraclass variability has in my classification system, however people certainly wash their hands in different ways, perhaps by doing motions in different orders. Being left- or right-handed also could play a role. Of huge importance to my work is dealing with class imbalance, because the dataset is over 95\% ``Not Hand Hygiene'' samples. The authors also propose a system model called the Activity Recognition Chain which has the following steps: data acquisition, signal preprocessing, segmentation, feature extraction and selection, training, and classification \cite{Bulling}. 
 
 Hammerla, Halloran, and Plötz provide another overview of how deep learning techniques are applied to HAR. They state that the main technique of HAR ``includes sliding window segmentation of time-series data captured with body-worn sensors, manually designed feature extraction procedures, and a wide variety of (supervised) classification methods'' \cite{Hammerla}. Their paper applies various types of neural networks to covering 3 problems: ``manipulative gestures, repetitive physical activities, and a medical application ... in Parkinson’s disease'' \cite{Hammerla}. One of the networks had five hidden layers and used either dropout or max-in norm for regularization with mini-batches of size 64. This network achieved just over 90\% accuracy on the repetitive gesture dataset but got almost 60\% on the other two datasets; the other networks did better on average over the three problems \cite{Hammerla}.
 
@@ -173,7 +173,8 @@ My project is a continuation of the work of Dr. Valerie Galluzzi, who did her di
 \end{figure}
 
 
-I initially worked on reorganizing the data. It had been given to me in a JSON file shown in Figure~\ref{jsonformat}, whereas it is much easier to work with CSV files that can be imported in Pandas, a Python module that can be combined with TensorFlow (Google's Deep Learning API). Once I had a Python script which converted the data to CSVs, I then made a second Python script to load the data from the CSV files and put the various acceleration data points into separate X, Y, and Z matrices. These matrices served as the inputs to the Tensorflow models.
+I initially worked on reorganizing the data. It had been given to me in a JSON file shown in Figure~\ref{jsonformat}, whereas it is much easier to work with CSV files that can be imported in Pandas, a Python module that can be combined with TensorFlow (Google's Deep Learning API). The reader will please note that the sample labels are abbreviated from ``Hand Hygiene'' and ``Not Hand Hygiene'' to ``HH'' and ``NHH'' respectively; these abbreviations will be used throughout the rest of this paper. Once I had a Python script which converted the data to CSVs, I then made a second Python script to load the data from the CSV files and put the various acceleration data points into separate X, Y, and Z matrices. These matrices served as the inputs to the Tensorflow models.
+
 \begin{figure}
 	\centering
 	\begin{tabular}{ ccc }
@@ -216,9 +217,20 @@ The layout of the preprocessed data I used for the majority of the project is sh
 
 Because of the way the data was collected, I did not actually have a continuous stream of data; that is, each sample did not exactly or directly take place immediately before or after another sample. Therefore I had to work with the individual slices provided to me, rather than a "constant" stream of values I could divide up any way I wished. This split of the data meant that I unfortunately could not truly look at slicing an entire session's data into different samples but did also allow for simple labelling of the samples as either Hand Hygiene or Not Hand Hygiene.
 
-One important aspect of the data to be discussed is that over 95\% of the total length of all data samples were from Non-Hand-Hygiene samples. This imbalance led to various discussions about how it should be resolved, as my initial tests simply ignored the HH samples around 96\% accuracy. To combat this problem, I consulted with Dr. Galluzzi and decided to ``supersample'' the HH samples. Therefore I would take, for example, an HH sample with 2000 acceleration values and, for a sample length of 25, take $x_{0} ... x_{24}$ as one sample and then take $x_{8} ... x_{32}$ as a second sample, continuing on so that there were now many more HH samples. The exact supersampling coefficient depended on the sample length, but was between 1 and 30 for all sample lengths.
+\begin{table}
+	\centering
+	\label{supersamples}
+	\begin{tabular}{|c|r|r|r|r|r|r|r|r|r|r|r|}
+		\hline
+		Sample Length          & 5 & 25 & 50 & 75 & 100 & 125 & 150 & 175 & 200 & 225 & 250 \\
+		\hline
+		Supersample Coefficient & 1 & 5  & 8  & 10 & 13 & 16  & 18  & 23  & 25  & 27  & 29 \\
+		\hline
+	\end{tabular}
+	\caption{Table of Supersample Values}
+\end{table}
 
-
+One important aspect of the data to be discussed is that over 95\% of the total length of all data samples were from Non-Hand-Hygiene samples. This imbalance led to various discussions about how it should be resolved, as my initial tests simply ignored the HH samples around 96\% accuracy. To combat this problem, I consulted with Dr. Galluzzi and decided to ``supersample'' the HH samples, in order to attain a balance of close to 45\% HH samples and 55\% NHH samples. As an example, for a sample length of 50, which corresponds to a supersample factor of 8, take $x_{0} ... x_{49}$ as one sample and then take $x_{8} ... x_{57}$ as the second sample, continuing on so that there are now many more (partially overlapping) HH samples. The exact supersampling coefficient depends on the sample length and is shown in Table~\ref{supersamples}.
 
 \section{Models}\label{models}
 
@@ -254,8 +266,13 @@ I began with 4 models, listed here with the names I gave them:
 	\caption{The XYZ Model}
 	\label{xyz-model}
 \end{figure}
-
-I then added a Convolutional Model, and I also added more layers to the Complex model and the Layered model in an attempt to improve accuracy.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{../images/layered5}
+	\caption{The 5-Layer Layered Model}
+	\label{layered5-model}
+\end{figure}
+I then added a Convolutional Model, and I also added more layers to the Complex model and the Layered model in an attempt to improve accuracy. A simplified representation (removing some labels and not showing the bias vectors )of the additional layers in the Layered model is shown in Figure~\ref{layered5-model}.
 
 The convolutional model was an attempt to think of the X,Y,Z acceleration data as something akin to an RGB picture. I used 3 channels (for the X, Y, and Z data) as well as dropout for regularization. Nevertheless, this model had the worst performance overall, with the accuracy of the both-hands model coming in at under 50\%, shown later in Figure~\ref{acuracy-deep}. Perhaps thinking about the data in this way just did not work within the framework of a convolution neural network.
 
@@ -292,7 +309,7 @@ This part covers the results of the experiments I ran, described in the previous
 
 \section{Recall}
 
-For all the tests I ran, I recorded statistics gathered from the confusion matrix. One of the main values one can gather from a confusion matrix is recall, which is $\frac{truepositives}{truepositives + falsenegatives}$. These values are all the averages from the models which took in the data of both the left and right hands as inputs. These values are from the testing portions of 10-fold cross-validated data. As shown in Figure~\ref{recall}, beyond the results of the XYZ model, the Layered model performed the best, maxing out at 71.10\% with a sample length of 100 (= 1 second). The maximum value of the Complex model was 75.07\% at the sample length of 75. 
+For all the tests I ran, I recorded statistics gathered from the confusion matrix. One of the main values one can gather from a confusion matrix is recall, which is $\frac{truepositives}{truepositives + falsenegatives}$. For my project, true positives are correctly-identified HH samples. False negatives are HH samples which were incorrectly identified as NHH samples. These values are all the averages from the models which took in the data of both the left and right hands as inputs. These values are from the testing portions of 10-fold cross-validated data. As shown in Figure~\ref{recall}, aside from the faulty results of the XYZ model, the Layered model performed the best, maxing out at 71.10\% with a sample length of 100 (= 1 second). The maximum value of the Complex model was 75.07\% at the sample length of 75. 
 
 \begin{figure}
 	\centering
@@ -324,7 +341,7 @@ In Figure~\ref{acuracy-deep}, the less-than-stellar results for the Convolutiona
 
 The reader may have noticed the dips in the charts for the sample lengths of 150 and 225. I found this drop very fascinating and I can only hypothesize that these sample lengths just did not ``line up'' well with the periodic motion of hand washing, which led to the poor results for these values. It is also interesting that the sample lengths immediately before and after these values rebounded and had results comparable to the other, shorter sample lengths.
 
-One interesting view is to look at the results by handedness, shown in Figure~\ref{handedness-original} for the Original Model. In general the model that only used the left hand's data performed worse than those using only the right hand or both hands' data. It would certainly make sense that using both hands would be better than only one hand, but it is also a bit surprising that looking at only the right hand was so much better than the left hand, and was virtually on par with using both hands. I can certainly see that the right hand being the dominant hand for most people may help out the system to recognize activities in some way.
+One interesting view is to look at the results by handedness, shown in Figure~\ref{handedness-original} for the Original Model. In general the model that only used the left hand's data performed worse than those using only the right hand or both hands' data. It would certainly make sense that using both hands would be better than only one hand, but it is also a bit surprising that looking at only the right hand was so much better than the left hand, and was virtually on par with using both hands. I can certainly see that the right hand being the dominant hand for most people may help out the system to recognize activities in some way, and I would even invite the reader to attempt the motion for himself or herself to see which hand moves more.
 
 \begin{figure}
 	\centering
@@ -352,7 +369,7 @@ Of course, one could also try to develop a more complicated neural network model
 
 Another important area to look into would be utilizing a video input of hand movements, perhaps with a depth camera or just an RGB camera. The video input could also be combined with acceleration data for increased effectiveness.
 
-Something else to look into would identifying proper hand hygiene technique, compared to simply detecting ``handwashing or not'' for a particular sample. Measuring the effective of the hand hygiene may need many more sensors, as discussed above. It could also be difficult to express proper technique in a way that would generalize for many subjects.
+Something else to look into would identifying proper hand hygiene technique, compared to simply detecting ``handwashing or not'' for a particular sample. Measuring the effectiveness of the hand hygiene may need many more sensors, as discussed above. It could also be difficult to express proper technique in a way that would generalize for many subjects.
 
 
 
