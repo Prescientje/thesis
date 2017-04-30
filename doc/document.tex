@@ -6,7 +6,7 @@
 % Title Page
 \begin{titlepage}
 \centering
-\title{Identifying Hand Hygiene Using Neural Networks}
+\title{Identifying Hand Hygiene Using Deep Neural Networks}
 \author{James H. Edwards \\ 
 	advised by Dr. Valerie Galluzzi, Dr. Matthew Boutell, and Dr. Klaus Baer\\
 	\\
@@ -26,14 +26,8 @@
 
 \chapter{Background}
 
-This part of the thesis provides an introduction to the concepts of deep learning and neural networks, followed by the Literature Review I conducted to gather information about other recent work in this field. It will help the reader become familiar with the works I consulted in order to better understand my topic and explain the reasoning behind deep learning in case that is necessary for the reader.
-\\\\
-\textbf{General Questions}
-\begin{enumerate}
-	\item Do I need to cite these Lit Review documents more?
-	\item Should I reference my work and how it relates in the Lit Review section, or cite these works in the Models/Results sections?
-	\item Should I have more of a summary of the articles or go more from my knowledge and just back up with citations? I feel like the Hand Hygiene and Deep Learning sections could be more from my knowledge but the parts about the camera- and sensor-based systems should be more summary-style.
-\end{enumerate}
+This part of the thesis provides an introduction to the concepts of deep learning and neural networks, followed by a summary of other recent work in this field. It will help the reader become familiar with the works I consulted in order to better understand my topic and explain the reasoning behind deep learning in case that is necessary for the reader.
+
 
 \section{Hand Hygiene}
 
@@ -46,7 +40,22 @@ One of the most effective techniques to prevent the spread of infection in hospi
 	\item After touching patient surroundings
 \end{enumerate}
 
-Because proper hand hygiene is so important, it is worthwhile to develop a system to ensure that healthcare workers are complying with these guidelines and following proper techniques. Therefore Dr. Galluzzi developed a system of wrist-attached sensors to measure the three axes of acceleration of a user's hands. For her Ph.D. she analyzed the data gathered from several healthcare workers during their shift, collecting data both from ``hand hygiene'' activities (i.e. actually washing one's hands) and ``not hand hygiene'' activities (e.g. unwrapping a piece of candy, tying one's shoes, or simply walking around) \cite{Galluzzi}. She then used machine learning techniques to try to identify particular hand hygiene motions such as the "fingertip scrub" and other actions outlined by the WHO \cite{Galluzzi}.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{../images/handhygiene-summary}
+	\caption{Hand Hygiene Technique with Soap and Water \cite{who2}}
+	\label{hh-guidelines}
+\end{figure}
+
+Because proper hand hygiene is so important, it is worthwhile to develop a system to ensure that healthcare workers are complying with these guidelines and following proper techniques. Therefore Dr. Galluzzi developed a system of wrist-attached sensors to measure the three axes of acceleration of a user's hands. For her Ph.D. dissertation she analyzed the data gathered from several healthcare workers during their shift, collecting data both from ``hand hygiene'' activities (i.e. actually washing one's hands) and ``not hand hygiene'' activities (e.g. unwrapping a piece of candy, tying one's shoes, or simply walking around) \cite{Galluzzi}. She then used machine learning techniques to try to identify particular hand hygiene motions such as the "fingertip scrub" and other actions outlined by the WHO \cite{Galluzzi}. One example of the guidelines are shown in Figure~\ref{hh-guidelines}.
+
+
+
+
+\section{Literature Review}
+
+This section gives a brief overview for each paper that I read in order to gain an understanding about the current uses of machine and deep learning in the healthcare field.
+
 
 \section{Deep Learning}
 
@@ -77,9 +86,6 @@ The author also introduced the idea of recurrent neural networks (RNNs). These a
 
 The website ``Neural Networks and Deep Learning,'' written by Michael Nielsen, provides a excellent and quite detailed introduction to deep learning by explaining the Mixed National Instrument of Standards and Technology (MNIST) dataset and networks that have high accuracy in classifying the dataset. He mentions that perceptrons multiply their inputs by a particular weight and then a bias is added, and then that value is output (perhaps into the sigmoid or ReLU function). Technically a cost function, usually Mean Squared Error (MSE) or Cross Entropy (CE), is used to find the error between the projected outputs and the real outputs, and then the weights and biases are adjusted through backpropagation. He also goes into great detail about backpropagation and explains how putting everything into vectors and then using a graph of calculations can make the calculations simpler and make it possible to compute all of the partial derivatives in one pass. He explains some types of regularization, namely L2 (attempting to limit the total value of the weight matrix), dropout (randomly removing nodes in a network), and early stopping, all of which are designed to avoid overfitting / overtraining. He then talks about CNNs in depth \cite{NNDL}.
 
-\section{Literature Review}
-
-This section gives a brief overview for each paper that I read in order to gain an understanding about the current uses of machine and deep learning in the healthcare field.
 
 \subsection{Video-Based Systems}
 
