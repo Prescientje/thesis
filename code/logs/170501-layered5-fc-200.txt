@@ -1,0 +1,39 @@
+Layered-LR-MODELBUILDER 5 fully connected TEST
+Sample length = 200
+Learning rate = 0.001000
+Stddev = 0.100000
+Superfactor = 25
+Epochs = 10
+Batch size = 8000
+Alpha = 0.001000
+lmodelname = savedModels-layered5/200-left/200-left
+ 
+ 
+ 
+Trial 1 savedModels-layered5/200-left/200-left
+ 
+epoch 1: ce_both = 11.936697, acc test both = 0.775356
+epoch 2: ce_both = 9.665005, acc test both = 0.800141
+epoch 3: ce_both = 8.762383, acc test both = 0.820355
+epoch 4: ce_both = 8.716545, acc test both = 0.774477
+epoch 5: ce_both = 8.650029, acc test both = 0.751802
+epoch 6: ce_both = 8.437380, acc test both = 0.811390
+epoch 7: ce_both = 8.350640, acc test both = 0.803832
+epoch 8: ce_both = 8.245268, acc test both = 0.811215
+epoch 9: ce_both = 8.165991, acc test both = 0.805766
+epoch 10: ce_both = 8.070320, acc test both = 0.806820
+ 
+btrain accuracy score = 0.889898
+btest  accuracy score = 0.806820
+btrain confusion matrix =
+[[19247  3486]
+ [ 2152 26322]]
+btest  confusion matrix =
+[[1538  454]
+ [ 645 3052]]
+ 
+bsaver not saved 1
+ 
+ 
+Trial 2 savedModels-layered5/200-left/200-left
+ 
