@@ -42,14 +42,14 @@ logfile = open(file_s, 'w')
 sample_len = int(sample_len)
 learn_rate = 0.001
 stddeviation = 0.02
-ALPHA = 0.002
+ALPHA = 0.003
 loud = int(loud)
-batchsize = 1000
+batchsize = 4000
 if sample_len < 51:
-    batchsize = 8000
+    batchsize = 10000
 if sample_len < 24:
     batchsize = 80000
-epochs = 20
+epochs = 50
 superfactor = int(superfactor)
 print_write("complex-modelbuilder5 TEST")
 print_write("This does not save any model files.")
