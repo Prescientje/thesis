@@ -61,6 +61,39 @@ def makeLayer(x,insize,outsize,activation,wname,bname,stddeviation=0.1):
     else:
         return W,tf.matmul(x,W)
 
+def makeLayerBN(x,insize,outsize,activation,wname,bname,stddeviation=0.1):
+    W = tf.Variable(tf.truncated_normal([insize,outsize],stddev=stddeviation),name=wname)
+    b = tf.Variable(tf.truncated_normal([1,outsize],stddev=stddeviation),name=bname)
+    wxb = tf.matmul(x,W) + b
+    mean, variance = tf.nn.moments(wxb, axes=[0])
+    scale = tf.Variable(tf.ones([outsize]))
+    shift = tf.Variable(tf.zeros([outsize]))
+    eps = 0.001
+    ema = tf.train.ExponentialMovingAverage(decay=0.5)
+    def mean_var_with_update():
+        ema_op = ema.apply([mean,variance])
+        with tf.control_dependencies([ema_op]):
+            return tf.identity(mean), tf.identity(variance)
+    m2, v2 = mean_var_with_update()
+    wxb2 = tf.nn.batch_normalization(wxb, m2, v2, shift, scale, eps)
+    return W,b,tf.nn.relu(wxb2)
+
+def makeLayerBNout(x,insize,outsize,activation,wname,bname,stddeviation=0.1):
+    W = tf.Variable(tf.truncated_normal([insize,outsize],stddev=stddeviation),name=wname)
+    wx = tf.matmul(x,W)
+    mean, variance = tf.nn.moments(wx, axes=[0])
+    scale = tf.Variable(tf.ones([outsize]))
+    shift = tf.Variable(tf.zeros([outsize]))
+    eps = 0.001
+    ema = tf.train.ExponentialMovingAverage(decay=0.5)
+    def mean_var_with_update():
+        ema_op = ema.apply([mean,variance])
+        with tf.control_dependencies([ema_op]):
+            return tf.identity(mean), tf.identity(variance)
+    m2, v2 = mean_var_with_update()
+    wx2 = tf.nn.batch_normalization(wx, m2, v2, shift, scale, eps)
+    return W,wx2
+
 def crossmatrix(m1,m2):
     result = np.zeros(m1.shape)
     for j in range(m1.shape[0]-1):

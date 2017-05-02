@@ -3,7 +3,7 @@ Sample length = 200
 Learning rate = 0.001000
 Stddev = 0.100000
 Superfactor = 25
-Epochs = 10
+Epochs = 50
 Batch size = 8000
 Alpha = 0.001000
 lmodelname = savedModels-layered5/200-left/200-left
@@ -12,28 +12,270 @@ lmodelname = savedModels-layered5/200-left/200-left
  
 Trial 1 savedModels-layered5/200-left/200-left
  
-epoch 1: ce_both = 11.936697, acc test both = 0.775356
-epoch 2: ce_both = 9.665005, acc test both = 0.800141
-epoch 3: ce_both = 8.762383, acc test both = 0.820355
-epoch 4: ce_both = 8.716545, acc test both = 0.774477
-epoch 5: ce_both = 8.650029, acc test both = 0.751802
-epoch 6: ce_both = 8.437380, acc test both = 0.811390
-epoch 7: ce_both = 8.350640, acc test both = 0.803832
-epoch 8: ce_both = 8.245268, acc test both = 0.811215
-epoch 9: ce_both = 8.165991, acc test both = 0.805766
-epoch 10: ce_both = 8.070320, acc test both = 0.806820
+epoch 5: ce_both = 8.614313, acc test both = 0.815433
+epoch 10: ce_both = 8.108424, acc test both = 0.816488
+epoch 15: ce_both = 7.719406, acc test both = 0.810863
+epoch 20: ce_both = 7.364794, acc test both = 0.802953
+epoch 25: ce_both = 7.024085, acc test both = 0.806820
+epoch 30: ce_both = 6.694086, acc test both = 0.813676
+epoch 35: ce_both = 6.425275, acc test both = 0.803129
+epoch 40: ce_both = 6.141993, acc test both = 0.805941
+epoch 45: ce_both = 5.874794, acc test both = 0.807699
+epoch 50: ce_both = 5.651719, acc test both = 0.795395
  
-btrain accuracy score = 0.889898
-btest  accuracy score = 0.806820
+btrain accuracy score = 0.937782
+btest  accuracy score = 0.795395
 btrain confusion matrix =
-[[19247  3486]
- [ 2152 26322]]
+[[21040  1693]
+ [ 1493 26981]]
 btest  confusion matrix =
-[[1538  454]
- [ 645 3052]]
+[[1647  345]
+ [ 819 2878]]
  
 bsaver not saved 1
  
  
 Trial 2 savedModels-layered5/200-left/200-left
  
+epoch 5: ce_both = 8.415794, acc test both = 0.876274
+epoch 10: ce_both = 7.881211, acc test both = 0.871529
+epoch 15: ce_both = 7.426372, acc test both = 0.874341
+epoch 20: ce_both = 7.008404, acc test both = 0.872232
+epoch 25: ce_both = 6.624464, acc test both = 0.876977
+epoch 30: ce_both = 6.274230, acc test both = 0.871178
+epoch 35: ce_both = 5.940721, acc test both = 0.873111
+epoch 40: ce_both = 5.638009, acc test both = 0.866432
+epoch 45: ce_both = 5.357784, acc test both = 0.865378
+epoch 50: ce_both = 5.067285, acc test both = 0.878207
+ 
+btrain accuracy score = 0.952740
+btest  accuracy score = 0.878207
+btrain confusion matrix =
+[[20700  2225]
+ [  195 28086]]
+btest  confusion matrix =
+[[1345  455]
+ [ 238 3652]]
+ 
+bsaver not saved 2
+ 
+ 
+Trial 3 savedModels-layered5/200-left/200-left
+ 
+epoch 5: ce_both = 8.569619, acc test both = 0.826683
+epoch 10: ce_both = 8.088431, acc test both = 0.839339
+epoch 15: ce_both = 7.675259, acc test both = 0.844612
+epoch 20: ce_both = 7.306955, acc test both = 0.839515
+epoch 25: ce_both = 6.959047, acc test both = 0.844085
+epoch 30: ce_both = 6.625586, acc test both = 0.843382
+epoch 35: ce_both = 6.311906, acc test both = 0.846898
+epoch 40: ce_both = 6.044934, acc test both = 0.840745
+epoch 45: ce_both = 5.743137, acc test both = 0.847776
+epoch 50: ce_both = 5.533431, acc test both = 0.837406
+ 
+btrain accuracy score = 0.941570
+btest  accuracy score = 0.837406
+btrain confusion matrix =
+[[19224  2722]
+ [  270 28991]]
+btest  confusion matrix =
+[[2036  743]
+ [ 182 2728]]
+ 
+ 
+ 
+Trial 4 savedModels-layered5/200-left/200-left
+ 
+epoch 5: ce_both = 8.527804, acc test both = 0.822496
+epoch 10: ce_both = 8.029712, acc test both = 0.863620
+epoch 15: ce_both = 7.640431, acc test both = 0.861160
+epoch 20: ce_both = 7.281962, acc test both = 0.863796
+epoch 25: ce_both = 6.948537, acc test both = 0.864675
+epoch 30: ce_both = 6.639522, acc test both = 0.858348
+epoch 35: ce_both = 6.337129, acc test both = 0.862917
+epoch 40: ce_both = 6.068868, acc test both = 0.861511
+epoch 45: ce_both = 5.794743, acc test both = 0.870123
+epoch 50: ce_both = 5.553468, acc test both = 0.862742
+ 
+btrain accuracy score = 0.944128
+btest  accuracy score = 0.862742
+btrain confusion matrix =
+[[19291  2218]
+ [  643 29054]]
+btest  confusion matrix =
+[[2637  579]
+ [ 202 2272]]
+ 
+ 
+ 
+Trial 5 savedModels-layered5/200-left/200-left
+ 
+epoch 5: ce_both = 8.823263, acc test both = 0.758172
+epoch 10: ce_both = 8.412333, acc test both = 0.778383
+epoch 15: ce_both = 7.924076, acc test both = 0.782425
+epoch 20: ce_both = 7.514882, acc test both = 0.785237
+epoch 25: ce_both = 7.071671, acc test both = 0.792091
+epoch 30: ce_both = 6.754798, acc test both = 0.787873
+epoch 35: ce_both = 6.498587, acc test both = 0.788576
+epoch 40: ce_both = 6.259884, acc test both = 0.773111
+epoch 45: ce_both = 6.007349, acc test both = 0.770475
+epoch 50: ce_both = 5.674806, acc test both = 0.777680
+ 
+btrain accuracy score = 0.949967
+btest  accuracy score = 0.777680
+btrain confusion matrix =
+[[20460  2139]
+ [  423 28184]]
+btest  confusion matrix =
+[[1819  307]
+ [ 958 2606]]
+ 
+ 
+ 
+Trial 6 savedModels-layered5/200-left/200-left
+ 
+epoch 5: ce_both = 8.313973, acc test both = 0.867464
+epoch 10: ce_both = 7.800794, acc test both = 0.872034
+epoch 15: ce_both = 7.315536, acc test both = 0.873792
+epoch 20: ce_both = 6.882458, acc test both = 0.873088
+epoch 25: ce_both = 6.479787, acc test both = 0.876077
+epoch 30: ce_both = 6.120949, acc test both = 0.876428
+epoch 35: ce_both = 5.773683, acc test both = 0.881702
+epoch 40: ce_both = 5.496298, acc test both = 0.862190
+epoch 45: ce_both = 5.184141, acc test both = 0.874670
+epoch 50: ce_both = 4.917734, acc test both = 0.860432
+ 
+btrain accuracy score = 0.949187
+btest  accuracy score = 0.860432
+btrain confusion matrix =
+[[21370  1316]
+ [ 1286 27235]]
+btest  confusion matrix =
+[[1615  424]
+ [ 370 3280]]
+ 
+ 
+ 
+Trial 7 savedModels-layered5/200-left/200-left
+ 
+epoch 5: ce_both = 8.739466, acc test both = 0.786116
+epoch 10: ce_both = 8.227456, acc test both = 0.821968
+epoch 15: ce_both = 7.842649, acc test both = 0.810193
+epoch 20: ce_both = 7.476270, acc test both = 0.810545
+epoch 25: ce_both = 7.136138, acc test both = 0.815817
+epoch 30: ce_both = 6.839647, acc test both = 0.808963
+epoch 35: ce_both = 6.597516, acc test both = 0.794200
+epoch 40: ce_both = 6.250433, acc test both = 0.806503
+epoch 45: ce_both = 5.966818, acc test both = 0.816344
+epoch 50: ce_both = 5.737761, acc test both = 0.819156
+ 
+btrain accuracy score = 0.943346
+btest  accuracy score = 0.819156
+btrain confusion matrix =
+[[20645  1209]
+ [ 1692 27660]]
+btest  confusion matrix =
+[[2140  731]
+ [ 298 2521]]
+ 
+ 
+ 
+Trial 8 savedModels-layered5/200-left/200-left
+ 
+epoch 5: ce_both = 8.665029, acc test both = 0.780278
+epoch 10: ce_both = 8.079946, acc test both = 0.855159
+epoch 15: ce_both = 7.691196, acc test both = 0.855159
+epoch 20: ce_both = 7.325676, acc test both = 0.857620
+epoch 25: ce_both = 6.989435, acc test both = 0.859729
+epoch 30: ce_both = 6.685683, acc test both = 0.850940
+epoch 35: ce_both = 6.376216, acc test both = 0.859554
+epoch 40: ce_both = 6.117247, acc test both = 0.852874
+epoch 45: ce_both = 5.851973, acc test both = 0.862014
+epoch 50: ce_both = 5.599579, acc test both = 0.860960
+ 
+btrain accuracy score = 0.943914
+btest  accuracy score = 0.860960
+btrain confusion matrix =
+[[19915  1905]
+ [  967 28420]]
+btest  confusion matrix =
+[[2326  579]
+ [ 212 2572]]
+ 
+ 
+ 
+Trial 9 savedModels-layered5/200-left/200-left
+ 
+epoch 5: ce_both = 8.374012, acc test both = 0.844815
+epoch 10: ce_both = 7.804850, acc test both = 0.874341
+epoch 15: ce_both = 7.344297, acc test both = 0.862566
+epoch 20: ce_both = 6.903986, acc test both = 0.861687
+epoch 25: ce_both = 6.501358, acc test both = 0.861687
+epoch 30: ce_both = 6.097387, acc test both = 0.875044
+epoch 35: ce_both = 5.756710, acc test both = 0.869069
+epoch 40: ce_both = 5.453030, acc test both = 0.869244
+epoch 45: ce_both = 5.166982, acc test both = 0.863269
+epoch 50: ce_both = 4.854663, acc test both = 0.878559
+ 
+btrain accuracy score = 0.950104
+btest  accuracy score = 0.878559
+btrain confusion matrix =
+[[19936  2116]
+ [  439 28715]]
+btest  confusion matrix =
+[[2149  524]
+ [ 167 2850]]
+ 
+bsaver not saved 9
+ 
+ 
+Trial 10 savedModels-layered5/200-left/200-left
+ 
+epoch 5: ce_both = 8.449318, acc test both = 0.868541
+epoch 10: ce_both = 7.851196, acc test both = 0.896661
+epoch 15: ce_both = 7.406470, acc test both = 0.901757
+epoch 20: ce_both = 6.997705, acc test both = 0.901933
+epoch 25: ce_both = 6.617198, acc test both = 0.901582
+epoch 30: ce_both = 6.275554, acc test both = 0.903691
+epoch 35: ce_both = 5.952366, acc test both = 0.897364
+epoch 40: ce_both = 5.668938, acc test both = 0.896309
+epoch 45: ce_both = 5.401361, acc test both = 0.886819
+epoch 50: ce_both = 5.103814, acc test both = 0.897715
+ 
+btrain accuracy score = 0.944850
+btest  accuracy score = 0.897715
+btrain confusion matrix =
+[[19797  2604]
+ [  220 28585]]
+btest  confusion matrix =
+[[1980  344]
+ [ 238 3128]]
+ 
+bsaver not saved 10
+ 
+Both Train Confusion Vals
+Specificity = 0.973655
+Miss Rate   = 0.090538
+Fallout     = 0.026345
+Recall      = 0.909462
+Precision   = 0.963677
+Accuracy    = 0.945759
+Both Test Confusion Vals
+Specificity = 0.885487
+Miss Rate   = 0.203478
+Fallout     = 0.114513
+Recall      = 0.796522
+Precision   = 0.842416
+Accuracy    = 0.846826
+Both Test Confusion Matrix
+[[ 19694.   5031.]
+ [  3684.  28487.]]
+ 
+average train score   = 
+[ 0.  0.  0.]
+average test score    = 
+[ 0.  0.  0.]
+best test score       = 
+[ 0.          0.          0.89771529]
+worst test score      = 
+[ 100.          100.            0.77768014]
