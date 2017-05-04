@@ -52,7 +52,7 @@ Because proper hand hygiene is so important, it is worthwhile to develop a syste
 
 
 
-\section{Previous Work Related to Hand Hygiene}
+\section{Related Work}
 
 This section gives a brief overview of the current uses of machine and deep learning in the healthcare field.
 
@@ -74,11 +74,23 @@ Backpropagation uses the gradient of this loss function to adjust the weights. T
 ** I would like to add more about backpropagation here, possibly including info from Nielsen **
 
 
-** I want to add more about SGD and get into more details **
+%The authors also go into detail about the finer points of stochastic gradient descent (SGD) and talk about how using small sets of examples is better than going one example at a time (essentially because things averaging out is better). 
+In order to both improve results and speed, it is now common to use stochastic gradient descent (SGD) during training instead of performing a gradient descent for every training example. Because larger sets of data perform better (simply due to the existence of more examples, which can perhaps be more generalized), SGD improves training time by following the gradient descent of a ``minibatch'' of examples at a time, instead of a single example \cite{Goodfellow-et-al-2016,ThreeGiants}. While this method loses a bit of particularity, it therefore gains in generalization over the many training examples which are utilized.
 
-The authors also go into detail about the finer points of stochastic gradient descent (SGD) and talk about how using small sets of examples is better than going one example at a time (essentially because things averaging out is better). The authors also explain the Rectified Linear Unit (ReLU) and other output functions, which introduce non-linearity in the matrix multiplications so the affine system of equations does not collapse.
 
-** I want to conclude my Deep Learning section by talking a bit about CNNs **
+When multiple layers are connected to each other in a deep network, these functions may tend to collapse together because the total function is simply a series of affine transformations. Thus it is important to use a nonlinear output function as the input to the next layer. Common choices are the hyperbolic tangent function or the logistic sigmoid activation function. A more recent development is the Rectified Linear Unit (ReLU) function, shown in Figure~\ref{relu}. The ReLU function is clearly nonlinear but also has a simple and easy gradient to calculate, so it is now the standard function used \cite{Goodfellow-et-al-2016,ThreeGiants}.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.4\textwidth]{../images/relu}
+	\caption{The ReLU function \cite{Goodfellow-et-al-2016}}
+	\label{relu}
+\end{figure}
+
+
+
+These authors also discussed Convolutional Neural Networks (CNNs), normally used for image data, and the different types of layers they use: convolutional layers, pooling layers, and fully-connected layers. Convolutional layers use patches of weights, usually much smaller than an image but also ``deeper'' in the third dimension, which then help identify different parts of an image, shown in Figure~\ref{convolution-exp}. CNNs have been hugely successful in the field of image recognition, which also aids in the effectiveness of self-driving cars. CNNs are now even able to caption images, showing that the networks really ``understand'' patterns in the picture and do not just see pixels of various colors.
+
 
 \begin{figure}
 	\centering
@@ -86,9 +98,6 @@ The authors also go into detail about the finer points of stochastic gradient de
 	\caption{A convolutional layer takes an adjacent set of values and extends the depth dimension \cite{karpathy}}
 	\label{convolution-exp}
 \end{figure}
-
-These authors also discussed Convolutional Neural Networks (CNNs), normally used for image data, and the different types of layers they use: convolutional layers, pooling layers, and fully-connected layers. Convolutional layers use patches of weights, usually much smaller than an image but also ``deeper'' in the third dimension, which then help identify different parts of an image, shown in Figure~\ref{convolution-exp}. CNNs have been hugely successful in the field of image recognition, which also aids in the effectiveness of self-driving cars. CNNs are now even able to caption images, showing that the networks really ``understand'' patterns in the picture and do not just see pixels of various colors.
-The authors also introduced the idea of Recurrent Neural Networks (RNNs). These types of networks are better suited for problems which ``involve sequential inputs, such as speech and language.'' They take in each input one at a time in order, going through the algorithm through each input while also accounting for the newer inputs, before outputting a value. These networks have trouble with storing data for a long time, so they are often combined with Long Short-Term Memory Cells (LSTMs), which is a unit that has hidden layers which allow for storing values and remembering them or clearing them based on inputs.
 
 
 The website ``Neural Networks and Deep Learning,'' written by Michael Nielsen, provides a excellent and quite detailed introduction to deep learning by explaining the Mixed National Instrument of Standards and Technology (MNIST) dataset and networks that have high accuracy in classifying the dataset. He mentions that perceptrons multiply their inputs by a particular weight and then a bias is added, and then that value is output (perhaps into the sigmoid or ReLU function). Technically a cost function, usually Mean Squared Error (MSE) or Cross Entropy (CE), is used to find the error between the projected outputs and the real outputs, and then the weights and biases are adjusted through backpropagation. He also goes into great detail about backpropagation and explains how putting everything into vectors and then using a graph of calculations can make the calculations simpler and make it possible to compute all of the partial derivatives in one pass. He explains some types of regularization, namely L2 (attempting to limit the total value of the weight matrix), dropout (randomly removing nodes in a network), and early stopping, all of which are designed to avoid overfitting / overtraining. He then talks about CNNs in depth \cite{NNDL}.
