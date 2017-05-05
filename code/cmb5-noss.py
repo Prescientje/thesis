@@ -7,8 +7,8 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_auc_score
 from sys import argv
 from datetime import date
+#from preprocess2 import preprocess
 from preprocessNoSuperSample import preprocess
-from preprocessNoSuperSample import get_NoSS_coeff
 from helper import *
 #loud = 2 means print lots of output
 #dir_name = './logs/'
@@ -45,11 +45,11 @@ learn_rate = 0.001
 stddeviation = 0.02
 ALPHA = 0.003
 loud = int(loud)
-batchsize = 4000
+batchsize = 300
 if sample_len < 51:
-    batchsize = 10000
+    batchsize = 600
 if sample_len < 24:
-    batchsize = 80000
+    batchsize = 1000
 epochs = 50
 superfactor = int(superfactor)
 print_write("complex-modelbuilder5 TEST")
@@ -66,9 +66,32 @@ print_write("Batch size = %d" % (batchsize))
 leftvals,rightvals = preprocess(sample_len)
 print_write(" ")
 
+leftvals = leftvals.T
+rightvals = rightvals.T
 
+print("leftvals.shape=",leftvals.shape)
+print("rightvals.shape=",rightvals.shape)
 
+lhh_count = 0
+rhh_count = 0
+for j in range(leftvals.shape[0]):
+    if leftvals[j][3] > 0:
+        lhh_count+=1
 
+for j in range(rightvals.shape[0]):
+    if rightvals[j][3] > 0:
+        rhh_count+=1
+
+print_write("lhh count = %d" % lhh_count)
+print_write("rhh count = %d" % rhh_count)
+
+# now check that all rhh samples have a correspondence with order and person to the lhh
+# same for r-nhh to  l-nhh then go from there. and hope and pray.
+
+newtotal = int(hh_count*2.2)
+newarray = np.zeros([newtotal,leftvals.shape[1]])
+print("newarray.shape=",newarray.shape)
+aa = 0
 
 
 
@@ -91,8 +114,9 @@ for x in random permutation
 
 
 
-
-
+print("Ready to run the non super sampled tensorflow!")
+leftvals = leftvals.T
+rightvals = rightvals.T
 
 
 

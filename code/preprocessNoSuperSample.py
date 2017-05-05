@@ -79,7 +79,7 @@ def preprocess(sample_len):
     col_names = {0: 'id', 1: 'hand', 2: 'order', 3: 'HH', 4: 'NHH', 5: 'OFF', 6: 'UNK'}
     #print(sample_len)
     superfactor = int(get_superfactor(sample_len))
-    noSScoeff = int(get_noSS_coeff(sample_len))
+    #noSScoeff = int(get_noSS_coeff(sample_len))
     #print("superfactor = ", superfactor)
     if superfactor < 1:
         return -1, -1
@@ -124,6 +124,7 @@ def preprocess(sample_len):
         hand   = olddata[(j,2)]
         if hand > 0.5:
             rhandsum += 1
+            #print(j,rhandsum)
         elif hand < 0.5:
             lhandsum += 1
         else:
@@ -134,26 +135,7 @@ def preprocess(sample_len):
         off = olddata[(j,6)]
         unk = olddata[(j,7)]
         line = np.array([[float(x) for x in ls[1:-1].split(', ')]])
-        #if hh >= 0.5 and len(line[0])>sample_len:
-            #s = 0
-            #supersample the hh samples if they are long enough
-            #for k in range(0,len(line[0]) - sample_len+1,superfactor):
-                #s += 1
-                #vals2[offset+k//superfactor] -= offset+k//superfactor
-                #data[offset+k//superfactor,7:] = line[0,k:k+sample_len]
-                #data[offset+k//superfactor,0] = user
-                #data[offset+k//superfactor,1] = hand
-                #data[offset+k//superfactor,2] = order
-                #data[offset+k//superfactor,3] = hh
-                #data[offset+k//superfactor,4] = nhh
-                #data[offset+k//superfactor,5] = off
-                #data[offset+k//superfactor,6] = unk
 
-            #offset += ceil((len(line[0])-sample_len+1)/superfactor)
-            #print(ceil((len(line[0])-sample_len+1)/superfactor) == s)
-
-            # Use the data if the line is divisible by 30 or it's hh
-            # --> caused hand imbalance issue !!
         e = int(ceil(len(line[0])/sample_len)*sample_len)
         s = 0
         for k in range(0,e,sample_len):
@@ -173,10 +155,21 @@ def preprocess(sample_len):
 
         offset += ceil(len(line[0])/sample_len)
         #print(ceil(len(line[0])/sample_len) == s)
+
     print(vals2.sum())
-    print(lhandsum)
-    print(rhandsum)
+    print("lhandsum=",lhandsum)
+    print("rhandsum=",rhandsum)
     print("data.shape = ", data.shape)
+    print("data[3].sum = ", data[:,3].sum())
+    print("data[3].max = ", data[:,3].max())
+    print("data[3].min = ", data[:,3].min())
+    print("data[4].sum = ", data[:,4].sum())
+    print("data[4].max = ", data[:,4].max())
+    print("data[4].min = ", data[:,4].min())
+    print("data[5].sum = ", data[:,5].sum())
+    print("data[5].max = ", data[:,5].max())
+    print("data[5].min = ", data[:,5].min())
+    #print(data.head())
 
     #print("val diff= %d" % ((vals - val2).sum()))
     #print("val diff= %d" % (vals.sum()-val2.sum()))
@@ -201,33 +194,7 @@ def preprocess(sample_len):
     nhhc = float(df['NHH'].sum())
     print("nhh = %f" % (nhhc/(hhc+nhhc)))
     df = 0
-    '''
-    for j in range(len(leftvals)):
-        if j % (len(leftvals)//20) == 0:
-            print(j)
-        if leftvals[(j,0)] != rightvals[(j,0)]:
-            print("row %d has a mismatch id" % j)
-        elif leftvals[(j,2)] != rightvals[(j,2)]:
-            print("row %d has a mismatch order" % j)
-        if leftvals[(j,3)] != rightvals[(j,3)]:
-            print("row %d has a mismatch hh" % j)
-        elif leftvals[(j,4)] != rightvals[(j,4)]:
-            print("row %d has a mismatch nhh" % j)
-        rowid = leftvals[(j,0)]
-        roworder = leftvals[(j,2)]
-        rowhh = leftvals[(j,3)]
-        rownhh = leftvals[(j,4)]
-        for i in range(len(rightvals)):
-            if rightvals[(i,0)] == rowid and rightvals[(i,2)] == roworder:
-                #print(i)
-                if rowhh != rightvals[(j,3)]:
-                    print("row %d has a mismatch hh" % j)
-                elif rownhh != rightvals[(j,4)]:
-                    print("row %d has a mismatch nhh" % j)
-    '''
-                    
-            
-    #print_write("all vals in leftdf and rightdf correspond!")
+
     leftvals = leftvals.T
     rightvals = rightvals.T
     return leftvals,rightvals

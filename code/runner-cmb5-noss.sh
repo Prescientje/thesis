@@ -4,8 +4,8 @@
 
 
 
-python cmb5-noss.py 200 25 200 1
-#python cmb5-noss.py 100 13 100 1
+#python cmb5-noss.py 200 25 200 1
+python cmb5-noss.py 100 13 100 1
 
 #python cmb5-noss.py 125 16 125 1
 #python cmb5-noss.py 150 18 150 1
