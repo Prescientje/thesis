@@ -45,9 +45,12 @@ def get_superfactor(sample_len):
         print("invalid sample_len")
         return -1
 
-def removeRandomNHH(dd1,dd2):
+def removeRandomNHH(dd1):
     print("start with check double lengths")
-    toDelete = []
+    leftToDelete = []
+    rightToDelete = []
+    leftToKeep = []
+    rightToKeep = []
     for j in range(len(dd1)):
         user = dd1[j,1]
         hand = dd1[j,2]
@@ -55,31 +58,83 @@ def removeRandomNHH(dd1,dd2):
         hh = dd1[j,4]
         nhh = dd1[j,5]
         #samples = len(np.array([[float(x) for x in dd1[j,8][1:-1].split(', ')]]))
-        if (j % 10 == 0):
+        if (j % 50 == 0):
             print("done with %d" % j)
-        for i in range(j,len(dd2)):
-            cuser = dd2[i,1]
-            chand = dd2[i,2]
-            corder = dd2[i,3]
-            chh = dd2[i,4]
-            cnhh = dd2[i,5]
-            #csamples = len(np.array([[float(x) for x in dd2[j,8][1:-1].split(', ')]]))
-            if user==cuser and order==corder and hh==chh and nhh==cnhh and hand!=chand and nhh>0.5:
-                toDelete.append(j)
-                toDelete.append(i)
+        for i in range(j+1,len(dd1)):
+            cuser = dd1[i,1]
+            chand = dd1[i,2]
+            corder = dd1[i,3]
+            chh = dd1[i,4]
+            cnhh = dd1[i,5]
+            #csamples = len(np.array([[float(x) for x in dd1[i,8][1:-1].split(', ')]]))
+            #if i!=j and user==cuser and order==corder and hh==chh and nhh==cnhh and hand!=chand:
+                #if samples != csamples:
+                    #print("length error:",i,j,samples,csamples)
+            if i!=j and user==cuser and order==corder and hh==chh and nhh==cnhh and hand!=chand and nhh>0.5:
+                if hand < chand:
+                    leftToDelete.append(j)
+                    rightToDelete.append(i)
+                    #print(j,i,hand,chand)
+                else:
+                    leftToDelete.append(i)
+                    rightToDelete.append(j)
+                    #print(i,j,chand,hand)
+            if i!=j and user==cuser and order==corder and hh==chh and nhh==cnhh and hand!=chand:
+                if hand < chand:
+                    leftToKeep.append(j)
+                    rightToKeep.append(i)
+                    #print(j,i,hand,chand)
+                else:
+                    leftToKeep.append(i)
+                    rightToKeep.append(j)
+                    #print(i,j,chand,hand)
 
-    td2 = np.array(toDelete)
-    p = np.random.permutation(td2)
-    print("length of permutation = %d" % (len(p)))
-    res = np.delete(dd1,p[80:],axis=0)
+    ltd = np.array(leftToDelete)
+    rtd = np.array(rightToDelete)
+    for j in range(len(ltd)):
+        for i in range(len(rtd)):
+            if j != i and ltd[j] == rtd[i]:
+                print("to delete duplicates: %d, %d" % (j,i))
+    #p = np.random.permutation(len(ltd))
+    #print("length of permutation = %d" % (len(p)))
+    #leftdelete = ltd[p[5:]]
+    #rightdelete = rtd[p[5:]]
+    leftdelete  = ltd[14:]
+    rightdelete = rtd[14:]
+    #print("last right 5", rightdelete[-5:])
+    deletedrows = np.concatenate((leftdelete,rightdelete))
+    deletelc = 0
+    deleterc = 0
+    for j in range(len(deletedrows)):
+        if dd1[deletedrows[j], 2] < 0.5:
+            deletelc += 1
+        if dd1[deletedrows[j], 2] > 0.5:
+            deleterc += 1
+
+    print("delete hand counts: ", deletelc, deleterc)
+
+    #print("last total 5", deletedrows[-5:])
+    res = np.delete(dd1,deletedrows,axis=0)
     print("shape of new data = %s" % str(res.shape))
+
+    keeprows = np.concatenate((leftToKeep,rightToKeep))
+    print("len of keeprows = ",len(keeprows))
+    '''
+    leftover = []
+    for j in range(len(keeprows)):
+        if j not in keeprows:
+            leftover.append(j)
+    res = np.delete(dd1,leftover,axis=0)
+    print("shape of new data = %s" % str(res.shape))
+    '''
+
     return res
 
 
 
 def preprocess(sample_len):
     old = pd.read_csv('shadowed.csv')
-    #print(old.head())
+    print(old.head())
     col_names = {0: 'id', 1: 'hand', 2: 'order', 3: 'HH', 4: 'NHH', 5: 'OFF', 6: 'UNK'}
     #print(sample_len)
     superfactor = int(get_superfactor(sample_len))
@@ -95,19 +150,20 @@ def preprocess(sample_len):
     sample_len = 3*sample_len
     #print(sample_len)
     olddata = old.values
-    print("inital shape = %s" % str(olddata.shape))
-    olddata = removeRandomNHH(olddata,olddata)
+    oldshape = olddata.shape
+    olddata = removeRandomNHH(olddata)
+    print("inital shape = %s" % str(oldshape))
     print("after removing shape = %s" % str(olddata.shape))
     old = 0
     hhlens = []
     for j in range(len(olddata)):
         ls = olddata[(j,8)]    #8 is the proper column for the values
         line = np.array([[float(x) for x in ls[1:-1].split(', ')]])
-        if olddata[(j,4)] >= 0.5 and len(line[0])>sample_len: #hh sample
-            total_entries_over_sample_len += ceil((len(line[0])-sample_len+1)/superfactor)
-            hhlens.append(len(line[0]))
-        else:
-            total_entries_over_sample_len += ceil(len(line[0])/sample_len)
+        #if olddata[(j,4)] >= 0.5 and len(line[0])>sample_len: #hh sample
+            #total_entries_over_sample_len += ceil((len(line[0])-sample_len+1)/superfactor)
+            #hhlens.append(len(line[0]))
+        #else:
+        total_entries_over_sample_len += ceil(len(line[0])/sample_len)
 
     total_entries_over_sample_len = int(total_entries_over_sample_len)
 
@@ -124,8 +180,6 @@ def preprocess(sample_len):
     offset = 0
     lhandsum = 0
     rhandsum = 0
-    vals = np.zeros(len(data))
-    vals2 = np.arange(len(data))
     for j in range(len(olddata)):
         ls = olddata[(j,8)]    #8 is the proper column for the values
         user = olddata[(j,1)]
@@ -152,7 +206,6 @@ def preprocess(sample_len):
                 data[offset+k//sample_len,7:(len(line[0])-(k+sample_len))] = line[0,k:len(line[0])]
             else:
                 data[offset+k//sample_len,7:] = line[0,k:k+sample_len]
-            vals2[offset+k//sample_len] -= offset+k//sample_len
             data[offset+k//sample_len,0] = user
             data[offset+k//sample_len,1] = hand
             data[offset+k//sample_len,2] = order
@@ -160,14 +213,14 @@ def preprocess(sample_len):
             data[offset+k//sample_len,4] = nhh
             data[offset+k//sample_len,5] = off
             data[offset+k//sample_len,6] = unk
+            #print(offset+k//sample_len) -> that part works
 
         offset += ceil(len(line[0])/sample_len)
         #print(ceil(len(line[0])/sample_len) == s)
 
-    print(vals2.sum())
     print("lhandsum=",lhandsum)
     print("rhandsum=",rhandsum)
-    print("data.shape = ", data.shape)
+    #print("data.shape = ", data.shape)
     #print("data[3].sum = ", data[:,3].sum())
     #print("data[3].max = ", data[:,3].max())
     #print("data[3].min = ", data[:,3].min())
@@ -179,8 +232,6 @@ def preprocess(sample_len):
     #print("data[5].min = ", data[:,5].min())
     #print(data.head())
 
-    #print("val diff= %d" % ((vals - val2).sum()))
-    #print("val diff= %d" % (vals.sum()-val2.sum()))
     #So now each line is:
     #UserID / Hand / Order / HH / NHH / OFF / UNK / x0 / y0 / z0 / x1 / ...
             
@@ -191,8 +242,12 @@ def preprocess(sample_len):
     df = df[df['UNK'] <= 0.5]
     df = df.drop('OFF', 1)
     df = df.drop('UNK', 1)
+    #print(df.head())
+    #print(df.tail())
     leftdf  = df[df['hand'] <= 0.5]
     rightdf = df[df['hand'] >= 0.5]
+    #print(leftdf.head())
+    #print(rightdf.head())
     leftvals = leftdf.values
     rightvals = rightdf.values
     print("leftvals shape  = %s" % str(leftvals.shape))

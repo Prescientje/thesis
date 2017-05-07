@@ -1,0 +1,19 @@
+complex-modelbuilder5 TEST
+This does not save any model files.
+Sample length = 200
+Learning rate = 0.001000
+Stddev = 0.020000
+Alpha = 0.003000
+Superfactor = 25
+Epochs = 50
+Batch size = 300
+ 
+leftvals.shape  = (2748, 605)
+rightvals.shape = (2748, 605)
+lhh count = 1241
+rhh count = 1241
+starting tensorflow section
+ 
+ 
+Trial 1 savedModels-complex/200-left/200-left
+ 

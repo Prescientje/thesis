@@ -1,0 +1,10 @@
+complex-modelbuilder5 TEST
+This does not save any model files.
+Sample length = 250
+Learning rate = 0.001000
+Stddev = 0.020000
+Alpha = 0.003000
+Superfactor = 29
+Epochs = 50
+Batch size = 300
+ 

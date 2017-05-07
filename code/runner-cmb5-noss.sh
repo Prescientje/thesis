@@ -4,7 +4,7 @@
 
 
 
-#python cmb5-noss.py 200 25 200 1
+python cmb5-noss.py 200 25 200 1
 python cmb5-noss.py 100 13 100 1
 
 #python cmb5-noss.py 125 16 125 1
@@ -15,7 +15,7 @@ python cmb5-noss.py 100 13 100 1
 #python complex-modelbuilder5.py 200 35 200 1
 
 
-#python cmb5-noss.py 250 29 250 1
+python cmb5-noss.py 250 29 250 1
 #python cmb5-noss.py 25 4 025 1
 #python cmb5-noss.py 50 8 050 1
 #python cmb5-noss.py 75 10 075 1

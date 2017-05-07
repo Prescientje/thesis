@@ -52,7 +52,7 @@ if sample_len < 24:
     batchsize = 1000
 epochs = 50
 superfactor = int(superfactor)
-print_write("complex-modelbuilder5 TEST")
+print_write("complex-modelbuilder5 NO SUPERSAMPLE TEST")
 print_write("This does not save any model files.")
 print_write("Sample length = %d" % (sample_len))
 print_write("Learning rate = %.6f" % (learn_rate))
@@ -69,8 +69,8 @@ print_write(" ")
 leftvals = leftvals.T
 rightvals = rightvals.T
 
-print("leftvals.shape  =",leftvals.shape)
-print("rightvals.shape =",rightvals.shape)
+print_write("leftvals.shape  = %s" % (str(leftvals.shape)))
+print_write("rightvals.shape = %s" % (str(rightvals.shape)))
 
 lhh_count = 0
 rhh_count = 0
@@ -85,21 +85,20 @@ for j in range(rightvals.shape[0]):
 print_write("lhh count = %d" % lhh_count)
 print_write("rhh count = %d" % rhh_count)
 if lhh_count != rhh_count:
+    print_write("unequal error, breaking")
     print(newv)
 
-# now check that all rhh samples have a correspondence with order and person to the lhh
-# same for r-nhh to  l-nhh then go from there. and hope and pray.
+'''
 
 newtotal = int(lhh_count*2.2)
 newx = np.zeros([newtotal,leftvals.shape[1]])
 newy = np.zeros([newtotal,leftvals.shape[1]])
-print("newarray.shape=",newx.shape)
+print_write("newarray.shape=",newx.shape)
 aa = 0
 
 
 
 
-'''
 noSScoeff = get_NoSS_coeff(sample_len)
 print(leftvals.shape)
 perm = np.random.permutation(leftvals.shape[0])
@@ -125,7 +124,7 @@ rightvals = rightvals.T
 
 
 
-print(newv)
+#print(newv)
 
 
 
