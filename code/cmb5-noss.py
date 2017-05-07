@@ -69,8 +69,8 @@ print_write(" ")
 leftvals = leftvals.T
 rightvals = rightvals.T
 
-print("leftvals.shape=",leftvals.shape)
-print("rightvals.shape=",rightvals.shape)
+print("leftvals.shape  =",leftvals.shape)
+print("rightvals.shape =",rightvals.shape)
 
 lhh_count = 0
 rhh_count = 0
@@ -84,14 +84,18 @@ for j in range(rightvals.shape[0]):
 
 print_write("lhh count = %d" % lhh_count)
 print_write("rhh count = %d" % rhh_count)
+if lhh_count != rhh_count:
+    print(newv)
 
 # now check that all rhh samples have a correspondence with order and person to the lhh
 # same for r-nhh to  l-nhh then go from there. and hope and pray.
 
-newtotal = int(hh_count*2.2)
-newarray = np.zeros([newtotal,leftvals.shape[1]])
-print("newarray.shape=",newarray.shape)
+newtotal = int(lhh_count*2.2)
+newx = np.zeros([newtotal,leftvals.shape[1]])
+newy = np.zeros([newtotal,leftvals.shape[1]])
+print("newarray.shape=",newx.shape)
 aa = 0
+
 
 
 
@@ -121,7 +125,7 @@ rightvals = rightvals.T
 
 
 
-
+print(newv)
 
 
 

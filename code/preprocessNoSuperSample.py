@@ -45,32 +45,36 @@ def get_superfactor(sample_len):
         print("invalid sample_len")
         return -1
 
-def get_noSS_coeff(sample_len):
-    if sample_len == 5:
-        return 100
-    if sample_len == 25:
-        return 80
-    if sample_len == 50:
-        return 70
-    if sample_len == 75:
-        return 60
-    if sample_len == 100:
-        return 50
-    if sample_len == 125:
-        return 40
-    if sample_len == 150:
-        return 30
-    if sample_len == 175:
-        return 30
-    if sample_len == 200:
-        return 30
-    if sample_len == 225:
-        return 30
-    if sample_len == 250:
-        return 30
-    else:
-        print("invalid sample_len")
-        return -1
+def removeRandomNHH(dd1,dd2):
+    print("start with check double lengths")
+    toDelete = []
+    for j in range(len(dd1)):
+        user = dd1[j,1]
+        hand = dd1[j,2]
+        order = dd1[j,3]
+        hh = dd1[j,4]
+        nhh = dd1[j,5]
+        #samples = len(np.array([[float(x) for x in dd1[j,8][1:-1].split(', ')]]))
+        if (j % 10 == 0):
+            print("done with %d" % j)
+        for i in range(j,len(dd2)):
+            cuser = dd2[i,1]
+            chand = dd2[i,2]
+            corder = dd2[i,3]
+            chh = dd2[i,4]
+            cnhh = dd2[i,5]
+            #csamples = len(np.array([[float(x) for x in dd2[j,8][1:-1].split(', ')]]))
+            if user==cuser and order==corder and hh==chh and nhh==cnhh and hand!=chand and nhh>0.5:
+                toDelete.append(j)
+                toDelete.append(i)
+
+    td2 = np.array(toDelete)
+    p = np.random.permutation(td2)
+    print("length of permutation = %d" % (len(p)))
+    res = np.delete(dd1,p[80:],axis=0)
+    print("shape of new data = %s" % str(res.shape))
+    return res
+
 
 
 def preprocess(sample_len):
@@ -91,6 +95,9 @@ def preprocess(sample_len):
     sample_len = 3*sample_len
     #print(sample_len)
     olddata = old.values
+    print("inital shape = %s" % str(olddata.shape))
+    olddata = removeRandomNHH(olddata,olddata)
+    print("after removing shape = %s" % str(olddata.shape))
     old = 0
     hhlens = []
     for j in range(len(olddata)):
@@ -110,6 +117,7 @@ def preprocess(sample_len):
     #print(total_entries_over_sample_len)
     #print(sample_len)
     data = np.zeros((total_entries_over_sample_len,7+sample_len), dtype=np.float32)
+    #checkDoubleLengths(olddata,olddata)
     
     #print("teosl = %d" % total_entries_over_sample_len)
     #print("sample_len = %d" % sample_len)
@@ -160,15 +168,15 @@ def preprocess(sample_len):
     print("lhandsum=",lhandsum)
     print("rhandsum=",rhandsum)
     print("data.shape = ", data.shape)
-    print("data[3].sum = ", data[:,3].sum())
-    print("data[3].max = ", data[:,3].max())
-    print("data[3].min = ", data[:,3].min())
-    print("data[4].sum = ", data[:,4].sum())
-    print("data[4].max = ", data[:,4].max())
-    print("data[4].min = ", data[:,4].min())
-    print("data[5].sum = ", data[:,5].sum())
-    print("data[5].max = ", data[:,5].max())
-    print("data[5].min = ", data[:,5].min())
+    #print("data[3].sum = ", data[:,3].sum())
+    #print("data[3].max = ", data[:,3].max())
+    #print("data[3].min = ", data[:,3].min())
+    #print("data[4].sum = ", data[:,4].sum())
+    #print("data[4].max = ", data[:,4].max())
+    #print("data[4].min = ", data[:,4].min())
+    #print("data[5].sum = ", data[:,5].sum())
+    #print("data[5].max = ", data[:,5].max())
+    #print("data[5].min = ", data[:,5].min())
     #print(data.head())
 
     #print("val diff= %d" % ((vals - val2).sum()))
@@ -187,7 +195,7 @@ def preprocess(sample_len):
     rightdf = df[df['hand'] >= 0.5]
     leftvals = leftdf.values
     rightvals = rightdf.values
-    print("leftvals shape = %s" % str(leftvals.shape))
+    print("leftvals shape  = %s" % str(leftvals.shape))
     print("rightvals shape = %s" % str(rightvals.shape))
     print("leftvals len = %s" % str(len(leftvals)))
     hhc = float(df['HH'].sum())
