@@ -134,7 +134,7 @@ def removeRandomNHH(dd1):
 
 def preprocess(sample_len):
     old = pd.read_csv('shadowed.csv')
-    print(old.head())
+    #print(old.head())
     col_names = {0: 'id', 1: 'hand', 2: 'order', 3: 'HH', 4: 'NHH', 5: 'OFF', 6: 'UNK'}
     #print(sample_len)
     superfactor = int(get_superfactor(sample_len))
@@ -220,17 +220,6 @@ def preprocess(sample_len):
 
     print("lhandsum=",lhandsum)
     print("rhandsum=",rhandsum)
-    #print("data.shape = ", data.shape)
-    #print("data[3].sum = ", data[:,3].sum())
-    #print("data[3].max = ", data[:,3].max())
-    #print("data[3].min = ", data[:,3].min())
-    #print("data[4].sum = ", data[:,4].sum())
-    #print("data[4].max = ", data[:,4].max())
-    #print("data[4].min = ", data[:,4].min())
-    #print("data[5].sum = ", data[:,5].sum())
-    #print("data[5].max = ", data[:,5].max())
-    #print("data[5].min = ", data[:,5].min())
-    #print(data.head())
 
     #So now each line is:
     #UserID / Hand / Order / HH / NHH / OFF / UNK / x0 / y0 / z0 / x1 / ...
@@ -242,12 +231,8 @@ def preprocess(sample_len):
     df = df[df['UNK'] <= 0.5]
     df = df.drop('OFF', 1)
     df = df.drop('UNK', 1)
-    #print(df.head())
-    #print(df.tail())
     leftdf  = df[df['hand'] <= 0.5]
     rightdf = df[df['hand'] >= 0.5]
-    #print(leftdf.head())
-    #print(rightdf.head())
     leftvals = leftdf.values
     rightvals = rightdf.values
     print("leftvals shape  = %s" % str(leftvals.shape))

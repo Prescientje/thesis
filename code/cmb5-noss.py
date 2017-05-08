@@ -19,16 +19,16 @@ def print_write(s):
     logfile.write("\n")
 
 def print_confusion_vals(con):
-    print_write("Miss Rate   = %0.6f" % get_missrate(con))
-    print_write("Fallout     = %0.6f" % get_fallout(con))
-    print_write("Precision   = %0.6f" % get_precision(con))
+    #print_write("Miss Rate   = %0.6f" % get_missrate(con))
+    #print_write("Fallout     = %0.6f" % get_fallout(con))
+    #print_write("Precision   = %0.6f" % get_precision(con))
     print_write("Recall      = %0.6f" % get_recall(con))
     print_write("Accuracy    = %0.6f" % get_accuracy(con))
     print_write("Specificity = %0.6f" % get_specificity(con))
 
-script, sample_len, superfactor, test_num, loud = argv
+script, sample_len, superfactor, test_num, loud, v = argv
 today = date.today()
-file_s = "logs/" + today.strftime("%y%m%d") + "-cmb5-noss-%s.txt" % test_num
+file_s = "logs/" + today.strftime("%y%m%d") + "-cmb5-noss-%s-%s.txt" % (test_num, v)
 left_save = sample_len + "-left/" + sample_len + "-left"
 right_save = sample_len + "-right/" + sample_len + "-right"
 both_save = sample_len + "-both/" + sample_len + "-both"
@@ -43,14 +43,14 @@ logfile = open(file_s, 'w')
 sample_len = int(sample_len)
 learn_rate = 0.001
 stddeviation = 0.02
-ALPHA = 0.003
+ALPHA = 0.05
 loud = int(loud)
 batchsize = 300
 if sample_len < 51:
     batchsize = 600
 if sample_len < 24:
     batchsize = 1000
-epochs = 50
+epochs = 10
 superfactor = int(superfactor)
 print_write("complex-modelbuilder5 NO SUPERSAMPLE TEST")
 print_write("This does not save any model files.")
@@ -619,15 +619,15 @@ for k in range(10):
     bconfusion_sumst += bct
 
     if loud > 0:
-        print_write(" ")
-        print_write("ltrain accuracy score = %f" % (ls))
-        print_write("ltest  accuracy score = %f" % (lst))
-        print_write("ltrain confusion matrix =\n%s" % (str(lc)))
-        print_write("ltest  confusion matrix =\n%s" % (str(lct)))
-        print_write("rtrain accuracy score = %f" % (rs))
-        print_write("rtest  accuracy score = %f" % (rst))
-        print_write("rtrain confusion matrix =\n%s" % (str(rc)))
-        print_write("rtest  confusion matrix =\n%s" % (str(rct)))
+        #print_write(" ")
+        #print_write("ltrain accuracy score = %f" % (ls))
+        #print_write("ltest  accuracy score = %f" % (lst))
+        #print_write("ltrain confusion matrix =\n%s" % (str(lc)))
+        #print_write("ltest  confusion matrix =\n%s" % (str(lct)))
+        #print_write("rtrain accuracy score = %f" % (rs))
+        #print_write("rtest  accuracy score = %f" % (rst))
+        #print_write("rtrain confusion matrix =\n%s" % (str(rc)))
+        #print_write("rtest  confusion matrix =\n%s" % (str(rct)))
         print_write("btrain accuracy score = %f" % (bs))
         print_write("btest  accuracy score = %f" % (bst))
         print_write("btrain confusion matrix =\n%s" % (str(bc)))
@@ -650,19 +650,19 @@ for k in range(10):
     if lst > maxscoret[0]:
         maxscoret[0] = lst
         #lsaver.save(sess=sess,save_path=lmodelname)
-        print_write("lsaver saved %d" % (k+1))
+        #print_write("lsaver saved %d" % (k+1))
     if lst < minscoret[0]:
         minscoret[0] = lst
     if rst > maxscoret[1]:
         maxscoret[1] = rst
         #rsaver.save(sess=sess,save_path=rmodelname)
-        print_write("rsaver saved %d" % (k+1))
+        #print_write("rsaver saved %d" % (k+1))
     if rst < minscoret[1]:
         minscoret[1] = rst
     if bst > maxscoret[2]:
         maxscoret[2] = bst
         #bsaver.save(sess=sess,save_path=bmodelname)
-        print_write("bsaver saved %d" % (k+1))
+        #print_write("bsaver saved %d" % (k+1))
     if bst < minscoret[2]:
         minscoret[2] = bst
         
