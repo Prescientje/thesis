@@ -44,11 +44,11 @@ learn_rate = 0.001
 stddeviation = 0.02
 ALPHA = 0.005
 loud = int(loud)
-batchsize = 8000
+batchsize = 400
 if sample_len < 51:
-    batchsize = 8000
+    batchsize = 800
 if sample_len < 24:
-    batchsize = 80000
+    batchsize = 8000
 epochs = 200
 superfactor = int(superfactor)
 print_write("complex-modelbuilder5 early-stop TEST")
@@ -254,7 +254,7 @@ for i in range(3):
 maxscoret = np.zeros(3)
 
 
-for k in range(1): 
+for k in range(10): 
     sess = tf.Session()
     sess.run(init)
 

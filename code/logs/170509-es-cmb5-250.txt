@@ -1,0 +1,82 @@
+complex-modelbuilder5 early-stop TEST
+This does not save any model files.
+Sample length = 250
+Learning rate = 0.001000
+Stddev = 0.020000
+Alpha = 0.005000
+Superfactor = 29
+Epochs = 200
+Batch size = 400
+lmodelname = savedModels-complex/250-left/250-left
+ 
+starting tensorflow section
+ 
+ 
+Trial 1 savedModels-complex/250-left/250-left
+ 
+00 -- 0.9046483622 -- 0.7949273791 -- 33.0653953552 -- 33.4098930359
+STOPPED EARLY AT EPOCH 13 of 199
+ 
+btrain accuracy score = 0.901204
+btest  accuracy score = 0.790592
+btrain confusion matrix =
+[[15430  3309]
+ [  793 21988]]
+btest  confusion matrix =
+[[1171  451]
+ [ 515 2476]]
+ 
+ 
+ 
+Trial 2 savedModels-complex/250-left/250-left
+ 
+00 -- 0.8960260116 -- 0.8651636679 -- 33.1187019348 -- 33.3142166138
+STOPPED EARLY AT EPOCH 12 of 199
+ 
+btrain accuracy score = 0.897495
+btest  accuracy score = 0.860611
+btrain confusion matrix =
+[[17277  1575]
+ [ 2681 19987]]
+btest  confusion matrix =
+[[1257  252]
+ [ 391 2713]]
+ 
+ 
+ 
+Trial 3 savedModels-complex/250-left/250-left
+ 
+00 -- 0.8893545279 -- 0.8131367873 -- 33.2864837646 -- 33.4954414368
+STOPPED EARLY AT EPOCH 13 of 199
+ 
+btrain accuracy score = 0.915655
+btest  accuracy score = 0.848255
+btrain confusion matrix =
+[[16407  1659]
+ [ 1843 21611]]
+btest  confusion matrix =
+[[1865  430]
+ [ 270 2048]]
+ 
+ 
+ 
+Trial 4 savedModels-complex/250-left/250-left
+ 
+00 -- 0.8798381464 -- 0.8118768964 -- 33.4159355164 -- 33.6508941650
+STOPPED EARLY AT EPOCH 12 of 199
+ 
+btrain accuracy score = 0.890195
+btest  accuracy score = 0.827048
+btrain confusion matrix =
+[[13450  4335]
+ [  224 23510]]
+btest  confusion matrix =
+[[1829  747]
+ [  51 1987]]
+ 
+ 
+ 
+Trial 5 savedModels-complex/250-left/250-left
+ 
+00 -- 0.9026974952 -- 0.7875569044 -- 33.5317840576 -- 34.0789718628
+STOPPED EARLY AT EPOCH 15 of 199

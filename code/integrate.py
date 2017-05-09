@@ -58,14 +58,15 @@ zrightvel = rightsamples[2::3,:].T
 xs = np.random.permutation(xleft.shape[0])
 hhc  = 0
 nhhc = 0
+picnum = 2
 randrange = []
 for x in range(100):
     hhval  = outleft[xs[x]][0]
     nhhval = outleft[xs[x]][1]
-    if hhval > 0 and hhc < 5:
+    if hhval > 0 and hhc < picnum:
         randrange.append(xs[x])
         hhc += 1
-    if nhhval > 0 and nhhc < 5:
+    if nhhval > 0 and nhhc < picnum:
         randrange.append(xs[x])
         nhhc += 1
 

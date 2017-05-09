@@ -6,7 +6,7 @@ Stddev = 0.020000
 Alpha = 0.005000
 Superfactor = 13
 Epochs = 200
-Batch size = 8000
+Batch size = 400
 lmodelname = savedModels-complex/100-left/100-left
  
 starting tensorflow section
@@ -14,3 +14,186 @@ starting tensorflow section
  
 Trial 1 savedModels-complex/100-left/100-left
  
+00 -- 0.8703466846 -- 0.7813554921 -- 7.8763675690 -- 8.0662336349
+STOPPED EARLY AT EPOCH 4 of 199
+ 
+btrain accuracy score = 0.865567
+btest  accuracy score = 0.761707
+btrain confusion matrix =
+[[41204  5668]
+ [ 8311 48802]]
+btest  confusion matrix =
+[[3836  595]
+ [2158 4964]]
+ 
+ 
+ 
+Trial 2 savedModels-complex/100-left/100-left
+ 
+00 -- 0.8613921373 -- 0.8600484681 -- 7.8955669403 -- 7.9025030136
+STOPPED EARLY AT EPOCH 4 of 199
+ 
+btrain accuracy score = 0.867941
+btest  accuracy score = 0.867665
+btrain confusion matrix =
+[[37470 10298]
+ [ 3434 52782]]
+btest  confusion matrix =
+[[2473 1062]
+ [ 467 7552]]
+ 
+ 
+ 
+Trial 3 savedModels-complex/100-left/100-left
+ 
+00 -- 0.8693164333 -- 0.8342565345 -- 7.3656821251 -- 7.4295220375
+STOPPED EARLY AT EPOCH 4 of 199
+ 
+btrain accuracy score = 0.876058
+btest  accuracy score = 0.828371
+btrain confusion matrix =
+[[35859  9315]
+ [ 3573 55237]]
+btest  confusion matrix =
+[[4506 1623]
+ [ 360 5065]]
+ 
+ 
+ 
+Trial 4 savedModels-complex/100-left/100-left
+ 
+00 -- 0.8667006463 -- 0.8373723386 -- 8.0988855362 -- 8.1603107452
+STOPPED EARLY AT EPOCH 4 of 199
+ 
+btrain accuracy score = 0.873961
+btest  accuracy score = 0.868271
+btrain confusion matrix =
+[[37940  6972]
+ [ 6134 52938]]
+btest  confusion matrix =
+[[5432  959]
+ [ 563 4600]]
+ 
+ 
+ 
+Trial 5 savedModels-complex/100-left/100-left
+ 
+00 -- 0.8724419141 -- 0.7578327852 -- 6.8384470940 -- 7.3312091827
+STOPPED EARLY AT EPOCH 5 of 199
+ 
+btrain accuracy score = 0.858767
+btest  accuracy score = 0.742167
+btrain confusion matrix =
+[[41250  5606]
+ [ 9080 48048]]
+btest  confusion matrix =
+[[4016  431]
+ [2548 4559]]
+ 
+ 
+ 
+Trial 6 savedModels-complex/100-left/100-left
+ 
+00 -- 0.8634995432 -- 0.8737124556 -- 7.9041347504 -- 7.9035725594
+STOPPED EARLY AT EPOCH 4 of 199
+ 
+btrain accuracy score = 0.873501
+btest  accuracy score = 0.878040
+btrain confusion matrix =
+[[37491  9721]
+ [ 3433 53340]]
+btest  confusion matrix =
+[[3044 1047]
+ [ 362 7100]]
+ 
+ 
+ 
+Trial 7 savedModels-complex/100-left/100-left
+ 
+00 -- 0.8711628712 -- 0.7660550459 -- 6.8898105621 -- 7.4022240639
+STOPPED EARLY AT EPOCH 5 of 199
+ 
+btrain accuracy score = 0.860469
+btest  accuracy score = 0.767180
+btrain confusion matrix =
+[[33503 11874]
+ [ 2635 55972]]
+btest  confusion matrix =
+[[3436 2490]
+ [ 200 5428]]
+ 
+ 
+ 
+Trial 8 savedModels-complex/100-left/100-left
+ 
+00 -- 0.8659697646 -- 0.8361606370 -- 8.0062770844 -- 8.1229057312
+STOPPED EARLY AT EPOCH 4 of 199
+ 
+btrain accuracy score = 0.848602
+btest  accuracy score = 0.821187
+btrain confusion matrix =
+[[40342  4844]
+ [10899 47899]]
+btest  confusion matrix =
+[[5268  849]
+ [1217 4220]]
+ 
+ 
+ 
+Trial 9 savedModels-complex/100-left/100-left
+ 
+00 -- 0.8539679181 -- 0.8553747620 -- 7.0459446907 -- 7.0503592491
+STOPPED EARLY AT EPOCH 4 of 199
+ 
+btrain accuracy score = 0.869903
+btest  accuracy score = 0.861606
+btrain confusion matrix =
+[[37590  8307]
+ [ 5221 52866]]
+btest  confusion matrix =
+[[4173 1233]
+ [ 366 5782]]
+ 
+ 
+ 
+Trial 10 savedModels-complex/100-left/100-left
+ 
+00 -- 0.8689990768 -- 0.8966591657 -- 7.1102328300 -- 7.0790424347
+STOPPED EARLY AT EPOCH 4 of 199
+ 
+btrain accuracy score = 0.867508
+btest  accuracy score = 0.893543
+btrain confusion matrix =
+[[38186  8287]
+ [ 5490 52021]]
+btest  confusion matrix =
+[[4207  623]
+ [ 607 6117]]
+ 
+ 
+Both Train Confusion Vals
+Miss Rate   = 0.175194
+Fallout     = 0.100689
+Precision   = 0.867417
+Recall      = 0.824806
+Accuracy    = 0.866228
+Specificity = 0.899311
+Both Test Confusion Vals
+Miss Rate   = 0.212697
+Fallout     = 0.137744
+Precision   = 0.820305
+Recall      = 0.787303
+Accuracy    = 0.828974
+Specificity = 0.862256
+Both Test Confusion Matrix
+[[ 40391.  10912.]
+ [  8848.  55387.]]
+ 
+average train score   = 
+[ 0.          0.          0.86622775]
+average test score    = 
+[ 0.          0.          0.82897386]
+best test score       = 
+[ 0.          0.          0.89354336]
+worst test score      = 
+[ 100.          100.            0.74216721]

@@ -6,7 +6,7 @@ Stddev = 0.020000
 Alpha = 0.005000
 Superfactor = 25
 Epochs = 200
-Batch size = 8000
+Batch size = 400
 lmodelname = savedModels-complex/200-left/200-left
  
 starting tensorflow section
@@ -14,3 +14,21 @@ starting tensorflow section
  
 Trial 1 savedModels-complex/200-left/200-left
  
+00 -- 0.4539613725 -- 0.3534891897 -- 26.8954849243 -- 28.3339862823
+STOPPED EARLY AT EPOCH 10 of 199
+ 
+btrain accuracy score = 0.890894
+btest  accuracy score = 0.799613
+btrain confusion matrix =
+[[19796  2937]
+ [ 2650 25824]]
+btest  confusion matrix =
+[[1621  371]
+ [ 769 2928]]
+ 
+ 
+ 
+Trial 2 savedModels-complex/200-left/200-left
+ 
+00 -- 0.8420692888 -- 0.8367311072 -- 25.1028862000 -- 25.1403751373
+STOPPED EARLY AT EPOCH 10 of 199
