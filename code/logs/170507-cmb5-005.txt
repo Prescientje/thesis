@@ -1,0 +1,82 @@
+complex-modelbuilder5 TEST
+This does not save any model files.
+Sample length = 5
+Learning rate = 0.001000
+Stddev = 0.020000
+Alpha = 0.003000
+Superfactor = 1
+Epochs = 50
+Batch size = 80000
+lmodelname = savedModels-complex/5-left/5-left
+ 
+starting tensorflow section
+ 
+ 
+Trial 1 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.804840
+ltest  accuracy score = 0.790175
+ltrain confusion matrix =
+[[ 404809  244259]
+ [ 106979 1043699]]
+ltest  confusion matrix =
+[[ 38211  27899]
+ [ 14060 119801]]
+rtrain accuracy score = 0.731214
+rtest  accuracy score = 0.714584
+rtrain confusion matrix =
+[[ 245231  403837]
+ [  79909 1070769]]
+rtest  confusion matrix =
+[[ 18576  47534]
+ [  9541 124320]]
+btrain accuracy score = 0.870852
+btest  accuracy score = 0.815333
+btrain confusion matrix =
+[[ 503954  145114]
+ [  87320 1063358]]
+btest  confusion matrix =
+[[ 49406  16704]
+ [ 20224 113637]]
+ 
+lsaver saved 1
+rsaver saved 1
+bsaver saved 1
+ 
+ 
+Trial 2 savedModels-complex/5-left/5-left
+ 
+ 
+ltrain accuracy score = 0.796152
+ltest  accuracy score = 0.864031
+ltrain confusion matrix =
+[[ 410814  258960]
+ [ 107914 1022057]]
+ltest  confusion matrix =
+[[ 28915  16489]
+ [ 10701 143867]]
+rtrain accuracy score = 0.721950
+rtest  accuracy score = 0.800632
+rtrain confusion matrix =
+[[ 252079  417695]
+ [  82724 1047247]]
+rtest  confusion matrix =
+[[ 13047  32357]
+ [  7511 147057]]
+btrain accuracy score = 0.845764
+btest  accuracy score = 0.871767
+btrain confusion matrix =
+[[ 520445  149329]
+ [ 128256 1001715]]
+btest  confusion matrix =
+[[ 34083  11321]
+ [ 14322 140246]]
+ 
+lsaver saved 2
+rsaver saved 2
+bsaver saved 2
+ 
+ 
+Trial 3 savedModels-complex/5-left/5-left
+ 
