@@ -43,13 +43,13 @@ logfile = open(file_s, 'w')
 sample_len = int(sample_len)
 learn_rate = 0.001
 stddeviation = 0.02
-ALPHA = 0.05
+ALPHA = 0.08
 loud = int(loud)
-batchsize = 300
+batchsize = 100
 if sample_len < 51:
-    batchsize = 600
+    batchsize = 200
 if sample_len < 24:
-    batchsize = 1000
+    batchsize = 400
 epochs = 10
 superfactor = int(superfactor)
 print_write("complex-modelbuilder5 NO SUPERSAMPLE TEST")

@@ -2,7 +2,7 @@
 # runs complex-modelbuilder.py
 #script, sample_len, superfactor, test_num, loud = argv
 
-i=2
+i=4
 
 python cmb5-noss.py 200 25 200 1 $i
 python cmb5-noss.py 100 13 100 1 $i
