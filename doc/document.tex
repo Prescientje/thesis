@@ -21,7 +21,7 @@
 \tableofcontents
 
 \begin{abstract}
-	Both machine and deep learning are growing fields of computer science that are rapidly increasing in relevance to our society. One compelling field of application is in the healthcare industry, and specfically in hospitals. Systems can be designed to help and improve the lives of patients with particular diseases or disabilities, and systems can even be trained to diagnose complicated symptoms or to otherwise aid doctors in their duties. The experiment used in this project was originally conducted by Dr. Valerie Galluzzi, who used custom 3-D wrist accelerometer sensors in order to measure healthcare worker compliance to hand-washing guidelines. The contribution of this work was to take the data and used neural networks to generate models that can predict when a novel sample is performing hand hygiene. After trying out various neural network configurations, the best model attained over 83\% accuracy with over 81\% recall.
+	Both machine and deep learning are growing fields of computer science that are rapidly increasing in relevance to our society. One compelling field of application is in the healthcare industry, and specfically in hospitals. Systems can be designed to help and improve the lives of patients with particular diseases or disabilities, and systems can even be trained to diagnose complicated symptoms or to otherwise aid doctors in their duties. The experiment used in this project was originally conducted by Dr. Valerie Galluzzi, who used custom 3-D wrist accelerometer sensors in order to measure healthcare worker compliance to hand-washing guidelines. The contribution of this work was to take the data and use deep neural networks to generate models that can predict when a novel sample is performing hand hygiene. After trying out various neural network configurations, the best model attained over 83\% accuracy with over 81\% recall.
 \end{abstract}
 
 \chapter{Background}
@@ -61,7 +61,7 @@ This section gives a brief overview of the current uses of machine and deep lear
 
 In the Nature article titled ``Deep Learning,'' three pioneers of deep learning and neural networks, Yann LeCun, Yoshua Bengio, and Geoffrey Hinton write about the big picture and history of deep learning. They state that the key differentiation between machine learning and deep learning is ``these layers of features [in deep learning] are not designed by human engineers: they are learned from data using a general-purpose learning procedure'' \cite{ThreeGiants}. 
 
-In general, deep learning uses layers of interconnected ``neurons'' in order to try to simulate the brain, as shown in Figure~\ref{neural-model}. In this example, each $x_{i}$ represents an input value and each $w_{i}$ represents a weight. These weights are initially random but are adjusted through a process known as backpropagation (i.e. the ``learning'' in ``deep learning''). The $w_{i}*x_{i}$ values are summed together and added to $b$, which is the bias value, and adds a linear offset to the model. Each input $x_{i}$ has a corresponding output, called $y_{i}$. These values are then used in a loss function to minimize the cross-entropy between the estimated output value and the real output value, which is: $$-\sum_{i} (w_{i}*x_{i})*\ln(y_{i}) $$
+In general, deep learning uses layers of interconnected ``neurons'' in order to try to simulate the brain, as shown in Figure~\ref{neural-model}. In this example, each $x_{i}$ represents an input value and each $w_{i}$ represents a weight. These weights are initially random but are adjusted through a process known as backpropagation (i.e. the ``learning'' in ``deep learning''). The $w_{i}*x_{i}$ values are summed together and added to $b$, which is the bias value, and adds a linear offset to the model. Each input $x_{i}$ has a corresponding output, called $y_{i}$. These values are then used in a loss function to minimize the cross-entropy between the estimated output value and the real output value, which for the example of one single input multiplied by one weight value is: $$-\sum_{i} (w_{i}*x_{i})*\ln(y_{i}) $$
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{../images/neuron_model}
@@ -70,9 +70,6 @@ In general, deep learning uses layers of interconnected ``neurons'' in order to 
 \end{figure}
 
 Backpropagation uses the gradient of this loss function to adjust the weights. This process is repeated, usually for a certain number of steps, with the result being that the multiplications and summations hopefully emulate the actual values corresponding to the input values. In practice these models have thousands to millions of $(x_{i}, y_{i})$ pairs and usually have a few hundred nodes in each of multiple layers, and the data is put into vectors or matrices to simplify the code. 
-
-** I would like to add more about backpropagation here, possibly including info from Nielsen **
-
 
 %The authors also go into detail about the finer points of stochastic gradient descent (SGD) and talk about how using small sets of examples is better than going one example at a time (essentially because things averaging out is better). 
 In order to both improve results and speed, it is now common to use stochastic gradient descent (SGD) during training instead of performing a gradient descent for every training example. Because larger sets of data perform better (simply due to the existence of more examples, which can perhaps be more generalized), SGD improves training time by following the gradient descent of a ``minibatch'' of examples at a time, instead of a single example \cite{Goodfellow-et-al-2016,ThreeGiants}. While this method loses a bit of particularity, it therefore gains in generalization over the many training examples which are utilized.
@@ -89,7 +86,7 @@ When multiple layers are connected to each other in a deep network, these functi
 
 
 
-These authors also discussed Convolutional Neural Networks (CNNs), normally used for image data, and the different types of layers they use: convolutional layers, pooling layers, and fully-connected layers. Convolutional layers use patches of weights, usually much smaller than an image but also ``deeper'' in the third dimension, which then help identify different parts of an image, shown in Figure~\ref{convolution-exp}. CNNs have been hugely successful in the field of image recognition, which also aids in the effectiveness of self-driving cars. CNNs are now even able to caption images, showing that the networks really ``understand'' patterns in the picture and do not just see pixels of various colors.
+Another type of neural network has the name of Convolutional Neural Networks (CNNs). These networks are normally used for image data, and use different types of layers, namely convolutional layers, pooling layers, and fully-connected layers. Convolutional layers use patches of weights, usually much smaller than an image but also ``deeper'' in the third dimension, which then help identify different parts of an image, shown in Figure~\ref{convolution-exp}. CNNs have been hugely successful in the field of image recognition, which also aids in the effectiveness of self-driving cars. CNNs are now even able to caption images, showing that the networks really ``understand'' patterns in the picture and do not just see pixels of various colors.
 
 
 \begin{figure}
@@ -100,7 +97,7 @@ These authors also discussed Convolutional Neural Networks (CNNs), normally used
 \end{figure}
 
 
-The website ``Neural Networks and Deep Learning,'' written by Michael Nielsen, provides a excellent and quite detailed introduction to deep learning by explaining the Mixed National Instrument of Standards and Technology (MNIST) dataset and networks that have high accuracy in classifying the dataset. He mentions that perceptrons multiply their inputs by a particular weight and then a bias is added, and then that value is output (perhaps into the sigmoid or ReLU function). Technically a cost function, usually Mean Squared Error (MSE) or Cross Entropy (CE), is used to find the error between the projected outputs and the real outputs, and then the weights and biases are adjusted through backpropagation. He also goes into great detail about backpropagation and explains how putting everything into vectors and then using a graph of calculations can make the calculations simpler and make it possible to compute all of the partial derivatives in one pass. He explains some types of regularization, namely L2 (attempting to limit the total value of the weight matrix), dropout (randomly removing nodes in a network), and early stopping, all of which are designed to avoid overfitting / overtraining. He then talks about CNNs in depth \cite{NNDL}.
+The website ``Neural Networks and Deep Learning,'' written by Michael Nielsen, provides a excellent and quite detailed introduction to deep learning by explaining the Mixed National Instrument of Standards and Technology (MNIST) dataset and networks that have high accuracy in classifying the dataset \cite{NNDL}. Nielsen mentions that perceptrons (another name for a node in a neural network) multiply their inputs by a particular weight and then a bias is added, and then that value is output (perhaps into the sigmoid or ReLU function). Technically a cost function, usually Mean Squared Error (MSE) or Cross Entropy (CE), is used to find the error between the projected outputs and the real outputs, and then the weights and biases are adjusted through backpropagation. He also goes into great detail about backpropagation and explains how putting everything into vectors and then using a graph of calculations can make the calculations simpler and make it possible to compute all of the partial derivatives in one pass. He explains some types of regularization, namely L2 (attempting to limit the total value of the weight matrix), dropout (randomly removing nodes in a network), and early stopping, all of which are designed to avoid overfitting / overtraining.
 
 
 \subsection{Video-Based Systems}
@@ -145,7 +142,7 @@ My project is a continuation of the work of Dr. Valerie Galluzzi, who did her di
 	\label{hh-plot}
 \end{figure}
 
-Due to some calculus tricks, Figure~\ref{nhh-plot} and Figure~\ref{hh-plot} show plots of a Not Hand Hygiene sample and a Hand Hygiene sample respectively. These two images were constructed by integrating the acceleration values and assuming an initial position and velocity of zero. The small differences between the paths of the hands in these plots can illustrate that it is not always straightforward to identify a Hand Hygiene sample from a Not Hand Hygiene sample.
+Figure~\ref{nhh-plot} and Figure~\ref{hh-plot} show plots of a Not Hand Hygiene sample and a Hand Hygiene sample respectively. These two images were constructed by integrating the acceleration values and assuming an initial position and velocity of zero. The small differences between the paths of the hands in these plots can illustrate that it is not always straightforward to identify a Hand Hygiene sample from a Not Hand Hygiene sample.
 
 \begin{figure}
 	\centering
@@ -255,7 +252,7 @@ Because of the way the data was collected, I did not actually have a continuous 
 	\caption{Table of Supersample Values}
 \end{table}
 
-One important aspect of the data to be discussed is that over 95\% of the total length of all data samples were from Non-Hand-Hygiene samples. This imbalance led to various discussions about how it should be resolved, as my initial tests simply ignored the HH samples around 96\% accuracy. To combat this problem, I consulted with Dr. Galluzzi and decided to ``supersample'' the HH samples, in order to attain a balance of close to 45\% HH samples and 55\% NHH samples. As an example, for a sample length of 50, which corresponds to a supersample factor of 8, take $x_{0} ... x_{49}$ as one sample and then take $x_{8} ... x_{57}$ as the second sample, continuing on so that there are now many more (partially overlapping) HH samples. The exact supersampling coefficient depends on the sample length and is shown in Table~\ref{supersamples}.
+One important aspect of the data to be discussed is that over 95\% of the total length of all data samples were from Non-Hand-Hygiene samples. This imbalance led to various discussions about how it should be resolved, as my initial tests simply ignored the HH samples around 96\% accuracy. To combat this problem, I consulted with Dr. Galluzzi and decided to ``supersample'' the HH samples, in order to attain a balance of close to 45\% HH samples and 55\% NHH samples. As an example, for a sample length of 50, which corresponded to a supersample factor of 8, I took $x_{0} ... x_{49}$ as one sample and then took $x_{8} ... x_{57}$ as the second sample, continuing on so that there were many more (albeit partially overlapping) HH samples. The exact supersampling coefficient to achieve a nice class balance depended on the sample length and is shown in Table~\ref{supersamples}.
 
 \section{Models}\label{models}
 
@@ -350,8 +347,7 @@ For all the tests I ran, I recorded statistics gathered from the confusion matri
 
 The accuracy results simple look at the percentage of total samples classified accurately. Overall these results were higher than the recall results, which is understandable since the accuracy values include the NHH samples. Again, the Layered 5 model achieved the highest results, shown in Figure~\ref{accuracy}. The maximum value on the 5 Layered model was an accuracy of 84.956\% with sample length 50. Not surprisingly the 5 Layered Complex model also performed quite well: the best accuracy result for that model was 84.75\%.
 
-In Figure~\ref{acuracy-deep}, the less-than-stellar results for the Convolutional Model can be seen. As explained in Section~\ref{models}, setting up the data as a ``3-channel'' matrix did not perform well. One factor for these results could be the sample length dimensions required to make the various convolutional layers work out. 
-
+In Figure~\ref{acuracy-deep}, the less-than-stellar results for the Convolutional Model can be seen. As explained in Section~\ref{models}, setting up the data as a ``3-channel'' matrix did not perform well due to the lack of a ``vertical'' relationship of the time-based data.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{../images/accuracy2}
