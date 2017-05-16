@@ -394,7 +394,9 @@ One important factor is using the wrist-sensor system compared to any other woul
 
 \section{Future Work}
 
-If one were interested in further developing the physical system, it could be interesting to investigate using different sensors, such as velocity, relative location, and/or angular acceleration, and determining if a particular combination is more accurate at measuring hand hygiene.
+If one were interested in further developing the physical system, it could be interesting to investigate using different sensors, such as velocity, relative location, and/or angular acceleration, and determining if a particular combination is more accurate at classifying hand hygiene. 
+
+Principal Components Analysis (PCA) could also be used to investigate which specific features are most important to hand hygiene classification. PCA is a method which uses eigenvectors to re-align the data set to help reduce the dimensions of the data in the problem by finding and potentially removing highly-correlated features \cite{pca}. Using PCA can also be a nice way to improve training speed without losing accuracy, because it can reduce the dimensionality and thus the complexity of the problem.
 
 Of course, one could also try to develop a more complicated neural network model or implement future deep learning techniques in order to improve the recall and accuracy of the system.
 
