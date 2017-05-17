@@ -21,7 +21,7 @@
 \tableofcontents
 
 \begin{abstract}
-	Both machine and deep learning are growing fields of computer science that are rapidly increasing in relevance to our society. One compelling field of application is in the healthcare industry, and specfically in hospitals. Systems can be designed to help and improve the lives of patients with particular diseases or disabilities, and systems can even be trained to diagnose complicated symptoms or to otherwise aid doctors in their duties. The experiment used in this project was originally conducted by Dr. Valerie Galluzzi, who used custom 3-D wrist accelerometer sensors in order to measure healthcare worker compliance to hand-washing guidelines. The contribution of this work was to take the data and use deep neural networks to generate models that can predict when a novel sample is performing hand hygiene. After trying out various neural network configurations, the best model attained over 83\% accuracy with over 81\% recall.
+	Both machine and deep learning are growing fields of computer science that are rapidly increasing in relevance to our society. One compelling field of application is in the healthcare industry, and specfically in hospitals. Systems can be designed to help and improve the lives of patients with particular diseases or disabilities, and systems can even be trained to diagnose complicated symptoms or to otherwise aid doctors in their duties. The experiment used in this project was originally conducted by Dr. Valerie Galluzzi, who used custom 3-D wrist accelerometer sensors in order to measure healthcare worker compliance to hand-washing guidelines. The contribution of this work was to take the data and use deep neural networks to generate models that can predict when a novel sample is performing hand hygiene. After experimenting with various neural network configurations, the best model attained over 83\% accuracy with over 81\% recall.
 \end{abstract}
 
 \chapter{Background}
@@ -52,9 +52,6 @@ Because proper hand hygiene is so important, it is worthwhile to develop a syste
 
 
 
-\section{Related Work}
-
-This section gives a brief overview of the current uses of machine and deep learning in the healthcare field.
 
 
 \section{Deep Learning}
@@ -86,7 +83,7 @@ When multiple layers are connected to each other in a deep network, these functi
 
 
 
-Another type of neural network has the name of Convolutional Neural Networks (CNNs). These networks are normally used for image data, and use different types of layers, namely convolutional layers, pooling layers, and fully-connected layers. Convolutional layers use patches of weights, usually much smaller than an image but also ``deeper'' in the third dimension, which then help identify different parts of an image, shown in Figure~\ref{convolution-exp}. CNNs have been hugely successful in the field of image recognition, which also aids in the effectiveness of self-driving cars. CNNs are now even able to caption images, showing that the networks really ``understand'' patterns in the picture and do not just see pixels of various colors.
+Another type of neural network has the name of Convolutional Neural Networks (CNNs). These networks are normally used for image data, and use different types of layers, namely convolutional layers, pooling layers, and fully-connected layers. Convolutional layers use patches of weights, usually much smaller than an image but also ``deeper'' in the third dimension, which then help identify different parts of an image, shown in Figure~\ref{convolution-exp}. CNNs have been very successful in the field of image recognition, which also aids in the effectiveness of self-driving cars. CNNs are now even able to caption images, showing that the networks really ``understand'' patterns in the picture and do not just see pixels of various colors.
 
 
 \begin{figure}
@@ -98,6 +95,11 @@ Another type of neural network has the name of Convolutional Neural Networks (CN
 
 
 The website ``Neural Networks and Deep Learning,'' written by Michael Nielsen, provides a excellent and quite detailed introduction to deep learning by explaining the Mixed National Instrument of Standards and Technology (MNIST) dataset and networks that have high accuracy in classifying the dataset \cite{NNDL}. Nielsen mentions that perceptrons (another name for a node in a neural network) multiply their inputs by a particular weight and then a bias is added, and then that value is output (perhaps into the sigmoid or ReLU function). Technically a cost function, usually Mean Squared Error (MSE) or Cross Entropy (CE), is used to find the error between the projected outputs and the real outputs, and then the weights and biases are adjusted through backpropagation. He also goes into great detail about backpropagation and explains how putting everything into vectors and then using a graph of calculations can make the calculations simpler and make it possible to compute all of the partial derivatives in one pass. He explains some types of regularization, namely L2 (attempting to limit the total value of the weight matrix), dropout (randomly removing nodes in a network), and early stopping, all of which are designed to avoid overfitting / overtraining.
+
+
+\section{Related Work}
+
+This section gives a brief overview of some current applications of machine and deep learning in the fields of healthcare and human activity interaction.
 
 
 \subsection{Video-Based Systems}
@@ -112,7 +114,7 @@ Shin and Sung claim that gesture recognition is of vital importance for wearable
 
 \subsection{Sensor-Based Systems}
 
-Bulling, Blank, and Schiele set out to make a comprehensive overview of the Human Activity Recognition (HAR) problem with ``body-worn inertial sensors'' \cite{Bulling}. They first mention several fields that would benefit from activity recognition: the industrial, sports, entertainment, and healthcare sectors \cite{Bulling}. They noted several applications and devices such as the Wii and Kinects as well as the Nike+ shoes which help track activity. They mentioned several key challenges that the field of HAR has: no clear definition of specific activities, the various possible composition of sensors, and the specific evaluation metrics for each application. Other challenges include intraclass variability, interclass similarity, the Null class problem, the diversity of physical activities, class imbalance, the annotation of ground truth, data collection and experiment design, variability in sensors, and system design. I can certainly understand how these issues can cause major problems in identification. For my data I am not exactly sure how much effect intraclass variability has in my classification system, however people certainly wash their hands in different ways, perhaps by doing motions in different orders. Being left- or right-handed also could play a role. Of huge importance to my work is dealing with class imbalance, because the dataset is over 95\% ``Not Hand Hygiene'' samples. The authors also propose a system model called the Activity Recognition Chain which has the following steps: data acquisition, signal preprocessing, segmentation, feature extraction and selection, training, and classification \cite{Bulling}. 
+Bulling, Blank, and Schiele set out to make a comprehensive overview of the Human Activity Recognition (HAR) problem with ``body-worn inertial sensors'' \cite{Bulling}. They first mention several fields that would benefit from activity recognition: the industrial, sports, entertainment, and healthcare sectors \cite{Bulling}. They noted several applications and devices such as the Wii and Kinects as well as the Nike+ shoes which help track activity. They mentioned several key challenges that the field of HAR has: no clear definition of specific activities, the various possible composition of sensors, and the specific evaluation metrics for each application. Other challenges include intraclass variability, interclass similarity, the Null class problem, the diversity of physical activities, class imbalance, the annotation of ground truth, data collection and experiment design, variability in sensors, and system design. I can certainly understand how these issues can cause major problems in identification. For my data I am not exactly sure how much effect intraclass variability has in my classification system, however people certainly wash their hands in different ways, perhaps by doing motions in different orders. Being left- or right-handed also could play a role. Of great importance to my work is dealing with class imbalance, because the dataset is over 95\% ``Not Hand Hygiene'' samples. The authors also propose a system model called the Activity Recognition Chain which has the following steps: data acquisition, signal preprocessing, segmentation, feature extraction and selection, training, and classification \cite{Bulling}. 
 
 Hammerla, Halloran, and Plötz provide another overview of how deep learning techniques are applied to HAR. They state that the main technique of HAR ``includes sliding window segmentation of time-series data captured with body-worn sensors, manually designed feature extraction procedures, and a wide variety of (supervised) classification methods'' \cite{Hammerla}. Their paper applies various types of neural networks to covering 3 problems: ``manipulative gestures, repetitive physical activities, and a medical application ... in Parkinson's disease'' \cite{Hammerla}. One of the networks had five hidden layers and used either dropout or max-in norm for regularization with mini-batches of size 64. This network achieved just over 90\% accuracy on the repetitive gesture dataset but got almost 60\% on the other two datasets; the other networks did better on average over the three problems \cite{Hammerla}.
 
@@ -256,9 +258,9 @@ One important aspect of the data to be discussed is that over 95\% of the total 
 
 \section{Models}\label{models}
 
-I began with 4 models, listed here with the names I gave them:
+I began with 4 models, listed below with the names I gave them. In the referenced figures, the `W's are the weight matrices and the `b's are the bias vectors.
 \begin{enumerate}
-	\item Original Model: A simple model with no hidden layer, which took in the $X,Y,Z$ values, shown in Figure~\ref{original-model}.
+	\item Original Model: A simple model with no hidden layer, which took in the $X,Y,Z$ values, shown in Figure~\ref{original-model}. This model acted as a simple baseline model for classification.
 	\item Complex Model: A model with no hidden layer but used the $X,Y,Z,X^{2},X^{2},X^{2},X*Y,Y*Z,Z*X$ values as inputs, shown in Figure~\ref{complex-model}.
 	\item Layered Model: A model with 1 hidden layer but only the $X,Y,Z$ values as inputs, shown in Figure~\ref{layered-model}.
 	\item XYZ Model: A model with a hidden layer but the data was arranged with the concept of the \textit{previous, now,} and \textit{next} instances, shown in Figure~\ref{xyz-model}.
@@ -294,7 +296,7 @@ I began with 4 models, listed here with the names I gave them:
 	\caption{The 5-Layer Layered Model}
 	\label{layered5-model}
 \end{figure}
-I then added a Convolutional Model, and I also added more layers to the Complex model and the Layered model in an attempt to improve accuracy. A simplified representation (removing some labels and not showing the bias vectors) of the additional layers in the Layered model is shown in Figure~\ref{layered5-model}.
+I then design a Convolutional Model, and I also added more layers to the Complex model and the Layered model in an attempt to improve accuracy. A simplified representation (removing some labels and not showing the bias vectors) of the additional layers in the Layered model is shown in Figure~\ref{layered5-model}.
 
 \begin{figure}
 	\centering
@@ -357,7 +359,7 @@ In Figure~\ref{acuracy-deep}, the less-than-stellar results for the Convolutiona
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{../images/deepresults}
-	\caption{Deep Model Accuracy}
+	\caption{Convolutional Model Accuracy}
 	\label{acuracy-deep}
 \end{figure}
 
