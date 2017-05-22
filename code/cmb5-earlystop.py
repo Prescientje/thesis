@@ -329,28 +329,6 @@ for k in range(10):
             batch_range = np.arange(ix,ix+batchsize)
             if ix+batchsize > len(train_lxi):
                 batch_range = np.arange(ix,len(train_lxi))
-            '''
-            lbatch_feed = {lx_place: train_lxi[perm[batch_range]],
-                           ly_place: train_lyi[perm[batch_range]],
-                           lz_place: train_lzi[perm[batch_range]],
-                           lxx_place: train_lxi[perm[batch_range]]*train_lxi[perm[batch_range]],
-                           lyy_place: train_lyi[perm[batch_range]]*train_lyi[perm[batch_range]],
-                           lzz_place: train_lzi[perm[batch_range]]*train_lzi[perm[batch_range]],
-                           lxy_place: train_lxi[perm[batch_range]]*train_lyi[perm[batch_range]],
-                           lyz_place: train_lyi[perm[batch_range]]*train_lzi[perm[batch_range]],
-                           lzx_place: train_lzi[perm[batch_range]]*train_lxi[perm[batch_range]],
-                           lout_place: train_louti[perm[batch_range]]}
-            rbatch_feed = {rx_place: train_rxi[perm[batch_range]],
-                           ry_place: train_ryi[perm[batch_range]],
-                           rz_place: train_rzi[perm[batch_range]],
-                           rxx_place: train_rxi[perm[batch_range]]*train_rxi[perm[batch_range]],
-                           ryy_place: train_ryi[perm[batch_range]]*train_ryi[perm[batch_range]],
-                           rzz_place: train_rzi[perm[batch_range]]*train_rzi[perm[batch_range]],
-                           rxy_place: train_rxi[perm[batch_range]]*train_ryi[perm[batch_range]],
-                           ryz_place: train_ryi[perm[batch_range]]*train_rzi[perm[batch_range]],
-                           rzx_place: train_rzi[perm[batch_range]]*train_rxi[perm[batch_range]],
-                           rout_place: train_routi[perm[batch_range]]}
-            '''
             bbatch_feed = {lx_place: train_lxi[perm[batch_range]],
                            ly_place: train_lyi[perm[batch_range]],
                            lz_place: train_lzi[perm[batch_range]],
@@ -389,7 +367,7 @@ for k in range(10):
             # previous CE and one before that show increasing trend
             print_write("STOPPED EARLY AT EPOCH %d of %d" % (e,epochs-2))
             break
-        elif epoch_cet > 2*prev2ce[0]:
+        elif e > 20 and epoch_cet > 2*prev2ce[0]:
             print_write("STOPPED EARLY AT EPOCH %d of %d" % (e,epochs-1))
             break
         e += 1

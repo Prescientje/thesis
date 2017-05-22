@@ -1,0 +1,36 @@
+complex-modelbuilder5 early-stop TEST
+This does not save any model files.
+Sample length = 200
+Learning rate = 0.001000
+Stddev = 0.020000
+Alpha = 0.005000
+Superfactor = 25
+Epochs = 200
+Batch size = 400
+lmodelname = savedModels-complex/200-left/200-left
+ 
+starting tensorflow section
+ 
+ 
+Trial 1 savedModels-complex/200-left/200-left
+ 
+00 -- 0.6128068428 -- 0.6899279311 -- 25.7955837250 -- 25.6603050232
+20 -- 0.5372117093 -- 0.4039374231 -- 1.0677653551 -- 1.6413896084
+STOPPED EARLY AT EPOCH 22 of 199
+ 
+btrain accuracy score = 0.537212
+btest  accuracy score = 0.403937
+btrain confusion matrix =
+[[22533   200]
+ [23498  4976]]
+btest  confusion matrix =
+[[1992    0]
+ [3391  306]]
+ 
+ 
+ 
+Trial 2 savedModels-complex/200-left/200-left
+ 
+00 -- 0.8733546850 -- 0.8521968366 -- 22.9392318726 -- 23.0492649078
+20 -- 0.8616568371 -- 0.8523725835 -- 0.3854926527 -- 0.4190844893
+STOPPED EARLY AT EPOCH 21 of 199

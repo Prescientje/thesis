@@ -1,0 +1,19 @@
+complex-modelbuilder5 early-stop TEST
+This does not save any model files.
+Sample length = 25
+Learning rate = 0.001000
+Stddev = 0.020000
+Alpha = 0.005000
+Superfactor = 4
+Epochs = 200
+Batch size = 800
+lmodelname = savedModels-complex/25-left/25-left
+ 
+starting tensorflow section
+ 
+ 
+Trial 1 savedModels-complex/25-left/25-left
+ 
+00 -- 0.8632180488 -- 0.8203790485 -- 0.8688303232 -- 0.9296786785
+20 -- 0.8710692630 -- 0.8119993536 -- 0.3254209161 -- 0.4095036685
+STOPPED EARLY AT EPOCH 21 of 199
